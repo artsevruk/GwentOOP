@@ -1,0 +1,41 @@
+package gwent.Card.Deck;
+
+import gwent.Card.Card;
+import gwent.Card.Creature.Lord;
+import gwent.Id;
+
+import java.util.List;
+
+/**
+ * Created by artsevruk on 04.09.2017.
+ */
+public class Deck extends Id {
+
+    protected String name;
+    protected List<Card> cards;
+    protected Lord lord;
+
+    public String getName() {
+        return name;
+    }
+
+    public List<Card> getCards() {
+        return cards;
+    }
+
+    public Lord getLord() {
+        return lord;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setCards(List<Card> cards) {
+        this.cards = cards;
+    }
+
+    public void setLord(Lord lord) {
+        this.lord = lord;
+    }
+}
