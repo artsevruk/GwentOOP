@@ -13,6 +13,13 @@ public abstract class Card extends Id {
     protected Fraction fraction;
     protected Rarity rarity;
 
+    public Card(String name, String description, Fraction fraction, Rarity rarity) {
+        this.name = name;
+        this.description = description;
+        this.fraction = fraction;
+        this.rarity = rarity;
+    }
+
     public String getName() {
         return name;
     }

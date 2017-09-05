@@ -5,8 +5,7 @@ package gwent.Card.Fraction;
  */
 public class NorthernRealm extends Fraction{
 
-    public NorthernRealm()
-    {
-        this.name = "NorthernRealm";
+    public NorthernRealm(){
+        super("NorthernRealm");
     }
 }

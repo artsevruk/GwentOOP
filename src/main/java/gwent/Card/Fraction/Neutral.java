@@ -5,9 +5,8 @@ package gwent.Card.Fraction;
  */
 public class Neutral extends Fraction {
 
-    public Neutral()
-    {
-        name = "Neutral";
+    public Neutral(){
+        super("Neutral");
     }
 
 }

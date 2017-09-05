@@ -6,6 +6,6 @@ package gwent.Card.Fraction;
 public class Scoiatael extends Fraction {
 
     public Scoiatael(){
-        this.name = "Scoiatael";
+        super("Scoiatael");
     }
 }

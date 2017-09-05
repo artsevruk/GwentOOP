@@ -14,13 +14,11 @@ public class Creature extends Card{
     protected Roweble position;
 
     public Creature(String name, String description, Fraction fraction, Rarity rarity, int cardPower, Roweble position) {
-        this.name = name;
-        this.description = description;
-        this.fraction = fraction;
-        this.rarity = rarity;
+        super(name, description, fraction, rarity);
         this.cardPower = cardPower;
         this.position = position;
     }
+
 
     public int getCardPower() {
         return cardPower;

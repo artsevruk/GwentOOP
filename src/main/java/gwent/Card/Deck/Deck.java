@@ -15,6 +15,12 @@ public class Deck extends Id {
     protected List<Card> cards;
     protected Lord lord;
 
+    public Deck(String name, List<Card> cards, Lord lord) {
+        this.name = name;
+        this.cards = cards;
+        this.lord = lord;
+    }
+
     public String getName() {
         return name;
     }

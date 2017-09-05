@@ -6,6 +6,6 @@ package gwent.Card.Fraction;
 public class Skellige extends Fraction {
 
     public Skellige(){
-        this.name = "Skellige";
+        super("Skellige");
     }
 }

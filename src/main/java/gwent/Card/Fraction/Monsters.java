@@ -7,6 +7,11 @@ public class Monsters extends Fraction{
 
     public Monsters()
     {
-        this.name = "Monsters";
+        super("Monsters");
+    }
+
+    public static void main(String[] args) {
+        Monsters monsters = new Monsters();
+        System.out.println(monsters.name);
     }
 }

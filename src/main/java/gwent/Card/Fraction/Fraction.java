@@ -10,6 +10,11 @@ public abstract class Fraction extends Id {
 
     protected String name = "Fraction";
 
+
+    public Fraction(String name)
+    {
+        this.name = name;
+    }
     public String getName()
     {
         return name;
