@@ -1,7 +1,7 @@
-package gwent.Card.Collection;
+package gwent.Card;
 
 import gwent.Card.Card;
-import gwent.Card.Deck.Deck;
+import gwent.Card.Deck;
 
 import java.util.List;
 

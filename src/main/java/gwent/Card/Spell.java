@@ -1,8 +1,6 @@
-package gwent.Card.Spell;
+package gwent.Card;
 
-import gwent.Card.Card;
 import gwent.Card.Fraction.Fraction;
-import gwent.Card.Rarity.Rarity;
 
 /**
  * Created by artsevruk on 04.09.2017.

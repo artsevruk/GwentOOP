@@ -1,7 +1,7 @@
 package gwent.Game;
 
 import gwent.Card.Card;
-import gwent.Card.Deck.Deck;
+import gwent.Card.Deck;
 
 import java.util.List;
 
@@ -15,7 +15,10 @@ public class Player {
     private List<Card> deckOfDiscardedCards;
     private Deck deck;
 
-
+    public Player(String name, Deck deck) {
+        this.name = name;
+        this.deck = deck;
+    }
 
     public String getName() {
         return name;

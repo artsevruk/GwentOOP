@@ -1,7 +1,6 @@
 package gwent.Card;
 
 import gwent.Card.Fraction.Fraction;
-import gwent.Card.Rarity.Rarity;
 import gwent.Id;
 
 /**

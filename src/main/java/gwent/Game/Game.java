@@ -1,7 +1,7 @@
 package gwent.Game;
 
 
-import gwent.Card.Deck.Deck;
+import gwent.Card.Deck;
 
 /**
  * Created by artsevruk on 04.09.2017.
@@ -46,10 +46,6 @@ public class Game {
     }
 
 
-    public void drawCardsOnHand(Player player, Deck deck)
-    {
-        deck.getCards();
-    }
 
 
 }

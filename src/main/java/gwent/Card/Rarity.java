@@ -1,4 +1,4 @@
-package gwent.Card.Rarity;
+package gwent.Card;
 
 
 /**
