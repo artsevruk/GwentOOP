@@ -23,4 +23,9 @@ public class Round {
     public void setTurn(boolean turn) {
         this.turn = turn;
     }
+
+    public boolean draw(){
+        return Math.random() < 0.5;
+    }
+
 }

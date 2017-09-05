@@ -10,6 +10,7 @@ import java.util.List;
  */
 public class Collection {
     protected List<Card> cards;
+    protected List<Card> deck;
     protected List<Deck> decks;
 
     public List<Card> getCards() {

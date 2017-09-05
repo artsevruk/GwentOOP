@@ -1,6 +1,8 @@
 package gwent.Game;
 
 
+import gwent.Card.Deck.Deck;
+
 /**
  * Created by artsevruk on 04.09.2017.
  */
@@ -42,4 +44,12 @@ public class Game {
     public void setRound(Round round) {
         this.round = round;
     }
+
+
+    public void drawCardsOnHand(Player player, Deck deck)
+    {
+        deck.getCards();
+    }
+
+
 }

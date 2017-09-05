@@ -1,5 +1,6 @@
 package gwent.Card.Deck;
 
+import com.sun.org.apache.bcel.internal.generic.LOR;
 import gwent.Card.Card;
 import gwent.Card.Creature.Lord;
 import gwent.Id;
@@ -43,5 +44,10 @@ public class Deck extends Id {
 
     public void setLord(Lord lord) {
         this.lord = lord;
+    }
+
+    public void addCardsInDeck(Card card)
+    {
+        cards.add(card);
     }
 }
