@@ -12,13 +12,21 @@ import java.util.Random;
  */
 public class Game {
 
-    private Battleground battleGround;
+
+    private Battleground battleground;
     private Player playerOne;
     private Player playerTwo;
     private Round round;
 
+    public Game(Battleground battleground, Player playerOne, Player playerTwo, Round round) {
+        this.battleground = battleground;
+        this.playerOne = playerOne;
+        this.playerTwo = playerTwo;
+        this.round = round;
+    }
+
     public Battleground getBattleGround() {
-        return battleGround;
+        return battleground;
     }
 
     public Player getPlayerOne() {
@@ -34,7 +42,7 @@ public class Game {
     }
 
     public void setBattleGround(Battleground battleGround) {
-        this.battleGround = battleGround;
+        this.battleground = battleGround;
     }
 
     public void setPlayerOne(Player playerOne) {
@@ -70,6 +78,75 @@ public class Game {
     }
 
     public void drawCardOnBattleground(Battleground battleground, Card card)
+    {
+
+    }
+
+    public void gameRoundeOne()
+    {
+
+        int countTurn = 0;
+        Random random = new Random();
+        int numberTurn = random.nextInt(4) + 2;
+        System.out.println("numberTurn: " + numberTurn);
+
+
+        drawCardsOnHand(playerOne, round);
+        drawCardsOnHand(playerTwo, round);
+
+        if (round.draw()) round.setTurn(true);
+        else round.setTurn(false);
+
+        System.out.println("round.getTurn: " + round.getTurn());
+
+        while (!round.getTurnPass())
+        {
+            System.out.println("Start! ");
+            if (round.getTurn())
+            {
+
+                int numberCardForPlayerOne = random.nextInt(playerOne.getDeck().getCards().size()-1);
+                System.out.println("1 numberCardForPlayerOne: " + numberCardForPlayerOne);
+
+                battleground.addCardOnRow(playerOne.getCardsOnHand().get(numberCardForPlayerOne-1), battleground.getMeleeRowPlayerOne(), battleground.getRangeRowPlayerOne(), battleground.getSiegeRowPlayerOne());
+                playerOne.getCardsOnHand().remove(numberCardForPlayerOne-1);
+
+
+
+                int numberCardForPlayerTwo = random.nextInt(playerTwo.getDeck().getCards().size()-1);
+                System.out.println("2 numberCardForPlayerOne: " + numberCardForPlayerTwo);
+
+                battleground.addCardOnRow(playerTwo.getCardsOnHand().get(numberCardForPlayerTwo-1), battleground.getMeleeRowPlayerTwo(), battleground.getRangeRowPlayerTwo(), battleground.getSiegeRowPlayerTwo());
+                playerTwo.getCardsOnHand().remove(numberCardForPlayerTwo-1);
+
+                countTurn++;
+                if (countTurn == numberTurn) round.setTurnPass(true);
+            }
+
+
+            else if (!round.getTurn())
+            {
+                int numberCardForPlayerTwo = random.nextInt(playerTwo.getDeck().getCards().size());
+                System.out.println("3 numberCardForPlayerOne: " + numberCardForPlayerTwo);
+
+                battleground.addCardOnRow(playerTwo.getCardsOnHand().get(numberCardForPlayerTwo-1), battleground.getMeleeRowPlayerTwo(), battleground.getRangeRowPlayerTwo(), battleground.getSiegeRowPlayerTwo());
+                playerTwo.getCardsOnHand().remove(numberCardForPlayerTwo-1);
+
+
+                int numberCardForPlayerOne = random.nextInt(playerOne.getDeck().getCards().size());
+                System.out.println("4 numberCardForPlayerOne: " + numberCardForPlayerOne);
+
+                battleground.addCardOnRow(playerOne.getCardsOnHand().get(numberCardForPlayerOne-1), battleground.getMeleeRowPlayerOne(), battleground.getRangeRowPlayerOne(), battleground.getSiegeRowPlayerOne());
+                playerOne.getCardsOnHand().remove(numberCardForPlayerOne-1);
+
+                countTurn++;
+                if (countTurn == numberTurn) round.setTurnPass(true);
+            }
+
+        }
+    }
+
+    public void game()
     {
 
     }
