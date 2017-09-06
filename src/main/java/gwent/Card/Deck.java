@@ -12,8 +12,7 @@ import java.util.List;
 public class Deck extends Id {
 
     protected String name;
-    protected List<Creature> cardsCreature = new ArrayList<Creature>();
-    protected List<Spell> cardsSpell= new ArrayList<Spell>();
+    protected List<Card> cards = new ArrayList<Card>();
     protected Lord lord;
 
     public Deck(String name) {
@@ -24,12 +23,8 @@ public class Deck extends Id {
         return name;
     }
 
-    public List<Creature> getCardsCreature() {
-        return cardsCreature;
-    }
-
-    public List<Spell> getCardsSpell() {
-        return cardsSpell;
+    public List<Card> getCards() {
+        return cards;
     }
 
     public Lord getLord() {
@@ -44,14 +39,9 @@ public class Deck extends Id {
         this.lord = lord;
     }
 
-    public void addCardCreatureInDeck(Creature creature)
+    public void addCardInDeck(Card card)
     {
-        cardsCreature.add(creature);
-    }
-
-    public void addCardSpellInDeck(Spell spell)
-    {
-        cardsSpell.add(spell);
+        cards.add(card);
     }
 
 

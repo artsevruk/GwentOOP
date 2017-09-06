@@ -8,11 +8,16 @@ public class Round {
     private int round;
     private boolean turn;
 
+    public Round() {
+        this.round = 1;
+        this.turn = draw();
+    }
+
     public int getRound() {
         return round;
     }
 
-    public boolean isTurn() {
+    public boolean getTurn() {
         return turn;
     }
 

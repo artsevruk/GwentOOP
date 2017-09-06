@@ -3,6 +3,7 @@ package gwent.Game;
 import gwent.Card.Card;
 import gwent.Card.Deck;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -11,24 +12,26 @@ import java.util.List;
 public class Player {
 
     private String name;
-    private List<Card> cardsOnHand;
-    private List<Card> deckOfDiscardedCards;
+    private ArrayList<Card> cardsOnHand = new ArrayList<Card>();
+    private ArrayList<Card> deckOfDiscardedCards =new  ArrayList<Card>();
     private Deck deck;
 
     public Player(String name, Deck deck) {
         this.name = name;
         this.deck = deck;
+        this.cardsOnHand = new ArrayList<Card>();
+        this.deckOfDiscardedCards =new  ArrayList<Card>();
     }
 
     public String getName() {
         return name;
     }
 
-    public List<Card> getCardsOnHand() {
+    public ArrayList<Card> getCardsOnHand() {
         return cardsOnHand;
     }
 
-    public List<Card> getDeckOfDiscardedCards() {
+    public ArrayList<Card> getDeckOfDiscardedCards() {
         return deckOfDiscardedCards;
     }
 
@@ -40,11 +43,11 @@ public class Player {
         this.name = name;
     }
 
-    public void setCardsOnHand(List<Card> cardsOnHand) {
-        this.cardsOnHand = cardsOnHand;
+    public void setCardsOnHand(ArrayList<Card> cardsOnHand) {
+        this.cardsOnHand =  cardsOnHand;
     }
 
-    public void setDeckOfDiscardedCards(List<Card> deckOfDiscardedCards) {
+    public void setDeckOfDiscardedCards(ArrayList<Card> deckOfDiscardedCards) {
         this.deckOfDiscardedCards = deckOfDiscardedCards;
     }
 
