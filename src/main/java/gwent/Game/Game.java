@@ -205,7 +205,7 @@ public class Game {
         }
 
         printMessageLogg(pointsPlayers, playerOne.getName()+ " is WINNER GAME, with a score of " + pointsPlayers[0] + " : " + pointsPlayers[1] +"!",playerTwo.getName()+ " is WINNER GAME, with a score of " + pointsPlayers[0] + " : " + pointsPlayers[1]+ "!", "The game ended in a draw, with a score of " + pointsPlayers[0] + " : " + pointsPlayers[1]+ "!");
-
+        logger.info("--------------------------------------------------------------------------------------------------------------");
     }
     private void printMessageLogg(int[] pointsPlayers, String messageOne, String messageTwo, String messageTрree)
     {
