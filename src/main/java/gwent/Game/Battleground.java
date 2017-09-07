@@ -1,6 +1,7 @@
 package gwent.Game;
 
 import gwent.Card.*;
+import gwent.Card.Fraction.Monsters;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,12 +13,13 @@ import java.util.Random;
 public class Battleground {
     private static Battleground ourInstance = new Battleground();
 
-    private ArrayList<Card> meleeRowPlayerOne;
-    private ArrayList<Card> rangeRowPlayerOne;
-    private ArrayList<Card> siegeRowPlayerOne;
-    private ArrayList<Card> meleeRowPlayerTwo;
-    private ArrayList<Card> rangeRowPlayerTwo;
-    private ArrayList<Card> siegeRowPlayerTwo;
+    private ArrayList<Card> meleeRowPlayerOne = new ArrayList<Card>();
+    private ArrayList<Card> rangeRowPlayerOne = new ArrayList<Card>();
+    private ArrayList<Card> siegeRowPlayerOne = new ArrayList<Card>();
+    private ArrayList<Card> meleeRowPlayerTwo = new ArrayList<Card>();
+    private ArrayList<Card> rangeRowPlayerTwo = new ArrayList<Card>();
+    private ArrayList<Card> siegeRowPlayerTwo = new ArrayList<Card>();
+
 
     private Battleground() {
     }
@@ -25,6 +27,8 @@ public class Battleground {
     public static Battleground getInstance() {
         return ourInstance;
     }
+
+
 
     public ArrayList<Card> getMeleeRowPlayerOne() {
         return meleeRowPlayerOne;
@@ -75,47 +79,15 @@ public class Battleground {
     }
 
 
-    private void setCardCreatureOnRowOfPosition(Card card, Round round, Roweble roweble, ArrayList<Card> rowPositionOfPlayer)
-    {
-        if (((Creature) card).getPosition() == roweble)
-        {
-            if (round.getTurn()) rowPositionOfPlayer.add(card);
-        }
-    }
-
-    public void addCardOnRow(Card card, Round round, ArrayList<Card> rowPositionOfPlayer)
-    {
-        if (card instanceof Creature)
-        {
-            setCardCreatureOnRowOfPosition(card, round, Roweble.MELLE, rowPositionOfPlayer);
-            setCardCreatureOnRowOfPosition(card, round, Roweble.RANGE, rowPositionOfPlayer);
-            setCardCreatureOnRowOfPosition(card, round, Roweble.SIEGE, rowPositionOfPlayer);
-
-            if (((Creature) card).getPosition() == Roweble.ANYROW)
-            {
-                Random random = new Random();
-                int i = random.nextInt(3);
-                if (i == 0)setCardCreatureOnRowOfPosition(card, round, Roweble.MELLE, rowPositionOfPlayer);
-                else if (i == 1)setCardCreatureOnRowOfPosition(card, round, Roweble.RANGE, rowPositionOfPlayer);
-                else if (i == 2)setCardCreatureOnRowOfPosition(card, round, Roweble.SIEGE, rowPositionOfPlayer);
-            }
-        }
-
-        else if (card instanceof Spell)
-        {
-            // TODO
-        }
-
-    }
-
-    public int getCardPowerOnRowInEndRound(ArrayList<Card> row)
+    private int getCardPowerOnRowInEndRound(ArrayList<Card> row)
     {
         int cardPowerInRow = 0;
         for (int i = 0; i < row.size(); i++)
         {
             if (row.get(i) instanceof Creature){
-                cardPowerInRow = ((Creature) row.get(i)).getCardPower();
+                cardPowerInRow = cardPowerInRow + ((Creature) row.get(i)).getCardPower();
                 System.out.println("cardPower + " + ((Creature) row.get(i)).getCardPower());
+                System.out.println("cardName + " + ((Creature) row.get(i)).getName());
             }
         }
         return cardPowerInRow;
@@ -125,5 +97,30 @@ public class Battleground {
     {
         return getCardPowerOnRowInEndRound(meleeRowPlayer) + getCardPowerOnRowInEndRound(rangeRowPlayer) + getCardPowerOnRowInEndRound(siegeRowPlayer);
     }
+
+
+    private void definedPositionCard(Card card, Roweble roweble, ArrayList<Card> position)
+    {
+        if (((Creature) card).getPosition() == roweble)
+        {
+            position.add(card);
+            System.out.println("card " + ((Creature) card).getPosition() + " add in list");
+        }
+    }
+
+
+    public void putCardOnBattleground(Card card, ArrayList<Card> mellePosition, ArrayList<Card> rangePosition, ArrayList<Card> siegePosition)
+    {
+        if (card instanceof Creature)
+        {
+            definedPositionCard(card, Roweble.MELLE, mellePosition);
+            definedPositionCard(card, Roweble.RANGE, rangePosition);
+            definedPositionCard(card, Roweble.SIEGE, siegePosition);
+
+        }
+    }
+
+
+
 
 }

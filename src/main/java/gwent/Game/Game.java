@@ -1,9 +1,11 @@
 package gwent.Game;
 
 
-import gwent.Card.Card;
-import gwent.Card.Deck;
+import gwent.Card.*;
+import gwent.Card.Fraction.Monsters;
+import org.apache.log4j.Logger;
 
+import java.lang.reflect.Array;
 import java.util.Calendar;
 import java.util.Random;
 
@@ -11,12 +13,14 @@ import java.util.Random;
  * Created by artsevruk on 04.09.2017.
  */
 public class Game {
+    final static Logger logger = Logger.getLogger(Game.class);
 
 
     private Battleground battleground;
     private Player playerOne;
     private Player playerTwo;
     private Round round;
+    private int[] pointsPlayers = new int[2];
 
     public Game(Battleground battleground, Player playerOne, Player playerTwo, Round round) {
         this.battleground = battleground;
@@ -63,9 +67,19 @@ public class Game {
         int count = 0;
         int drawCardsInRounds;
 
-        if (round.getRound() == 1) drawCardsInRounds = 10;
-        else if(round.getRound() == 2) drawCardsInRounds = 2;
-        else drawCardsInRounds = 1;
+        if (round.getRound() == 1){
+            drawCardsInRounds = 10;
+            logger.info("Draw 10 cards" + player.getName());
+        }
+        else if(round.getRound() == 2) {
+            drawCardsInRounds = 2;
+            logger.info("add 2 cards" + player.getName());
+        }
+
+        else {
+            drawCardsInRounds = 1;
+            logger.info("add 1 cards" + player.getName());
+        }
 
         while (count < drawCardsInRounds)
         {
@@ -77,78 +91,128 @@ public class Game {
 
     }
 
-    public void drawCardOnBattleground(Battleground battleground, Card card)
+    public int randomNumber(int max)
     {
 
+        return (int) (Math.random() * max);
     }
 
-    public void gameRoundeOne()
+    private void turnPlayerOne()
     {
+        int numberCardForPlayerOne = 0;
 
-        int countTurn = 0;
-        Random random = new Random();
-        int numberTurn = random.nextInt(4) + 2;
-        System.out.println("numberTurn: " + numberTurn);
+        if (playerOne.getCardsOnHand().size()>0) {
 
+            numberCardForPlayerOne = randomNumber(playerOne.getCardsOnHand().size());
+            Card card = playerOne.getCardsOnHand().get(numberCardForPlayerOne);
+            battleground.putCardOnBattleground(card, battleground.getMeleeRowPlayerOne(), battleground.getRangeRowPlayerOne(), battleground.getSiegeRowPlayerOne());
+            playerOne.getCardsOnHand().remove(numberCardForPlayerOne);
+            logger.info(playerOne.getName() + " turn card on battleground: " + card.getName() + " " + card.getFraction().getName() + ", power is " + ((Creature) card).getCardPower() + ", on position " + ((Creature) card).getPosition());
+        }
+        else round.setTurnPass(true);
+    }
 
-        drawCardsOnHand(playerOne, round);
-        drawCardsOnHand(playerTwo, round);
+    private void turnPlayerTwo()
+    {
+        int numberCardForPlayerTwo = 0;
+        if (playerTwo.getCardsOnHand().size()>0){
 
-        if (round.draw()) round.setTurn(true);
-        else round.setTurn(false);
+            numberCardForPlayerTwo = randomNumber(playerTwo.getCardsOnHand().size());
+            Card card = playerTwo.getCardsOnHand().get(numberCardForPlayerTwo);
+            battleground.putCardOnBattleground(card, battleground.getMeleeRowPlayerTwo(), battleground.getSiegeRowPlayerTwo(), battleground.getSiegeRowPlayerTwo());
+            playerTwo.getCardsOnHand().remove(numberCardForPlayerTwo);
+            logger.info(playerTwo.getName() + " turn card on battleground: " + card.getName() + " " + card.getFraction().getName() + ", power is " + ((Creature) card).getCardPower() + ", on position " + ((Creature) card).getPosition());
 
-        System.out.println("round.getTurn: " + round.getTurn());
+        }
+        else round.setTurnPass(true);
+    }
 
-        while (!round.getTurnPass())
-        {
-            System.out.println("Start! ");
-            if (round.getTurn())
-            {
-
-                int numberCardForPlayerOne = random.nextInt(playerOne.getDeck().getCards().size()-1);
-                System.out.println("1 numberCardForPlayerOne: " + numberCardForPlayerOne);
-
-                battleground.addCardOnRow(playerOne.getCardsOnHand().get(numberCardForPlayerOne-1), battleground.getMeleeRowPlayerOne(), battleground.getRangeRowPlayerOne(), battleground.getSiegeRowPlayerOne());
-                playerOne.getCardsOnHand().remove(numberCardForPlayerOne-1);
-
-
-
-                int numberCardForPlayerTwo = random.nextInt(playerTwo.getDeck().getCards().size()-1);
-                System.out.println("2 numberCardForPlayerOne: " + numberCardForPlayerTwo);
-
-                battleground.addCardOnRow(playerTwo.getCardsOnHand().get(numberCardForPlayerTwo-1), battleground.getMeleeRowPlayerTwo(), battleground.getRangeRowPlayerTwo(), battleground.getSiegeRowPlayerTwo());
-                playerTwo.getCardsOnHand().remove(numberCardForPlayerTwo-1);
-
-                countTurn++;
-                if (countTurn == numberTurn) round.setTurnPass(true);
-            }
-
-
-            else if (!round.getTurn())
-            {
-                int numberCardForPlayerTwo = random.nextInt(playerTwo.getDeck().getCards().size());
-                System.out.println("3 numberCardForPlayerOne: " + numberCardForPlayerTwo);
-
-                battleground.addCardOnRow(playerTwo.getCardsOnHand().get(numberCardForPlayerTwo-1), battleground.getMeleeRowPlayerTwo(), battleground.getRangeRowPlayerTwo(), battleground.getSiegeRowPlayerTwo());
-                playerTwo.getCardsOnHand().remove(numberCardForPlayerTwo-1);
-
-
-                int numberCardForPlayerOne = random.nextInt(playerOne.getDeck().getCards().size());
-                System.out.println("4 numberCardForPlayerOne: " + numberCardForPlayerOne);
-
-                battleground.addCardOnRow(playerOne.getCardsOnHand().get(numberCardForPlayerOne-1), battleground.getMeleeRowPlayerOne(), battleground.getRangeRowPlayerOne(), battleground.getSiegeRowPlayerOne());
-                playerOne.getCardsOnHand().remove(numberCardForPlayerOne-1);
-
-                countTurn++;
-                if (countTurn == numberTurn) round.setTurnPass(true);
-            }
-
+    private void isPassed(int counter, int numberTurn, Player player)
+    {
+        if (counter == numberTurn) {
+            round.setTurnPass(true);
+            logger.info(player.getName() + " is PASSED");
         }
     }
 
-    public void game()
-    {
+    public void roundOfGame() {
+
+        logger.info("Round " + round.getRound());
+
+        int countTurn = 0;
+
+        int numberTurn = randomNumber(4) + 3;
+        round.setTurnPass(false);
+
+        drawCardsOnHand(playerOne, round);
+
+
+        drawCardsOnHand(playerTwo, round);
+
+        if (round.getTurn())logger.info("First turn " + playerOne.getName());
+        else logger.info("First turn " + playerTwo.getName());
+
+
+        while (!round.getTurnPass()) {
+
+
+            if (round.getTurn()) {
+
+                turnPlayerOne();
+                isPassed(countTurn++,numberTurn,playerOne);
+                turnPlayerTwo();
+                isPassed(countTurn++,numberTurn,playerTwo);
+
+
+            } else if (!round.getTurn()) {
+
+                turnPlayerTwo();
+                isPassed(countTurn++,numberTurn,playerTwo);
+                turnPlayerOne();
+                isPassed(countTurn++,numberTurn,playerOne);
+
+            }
+
+        }
+            pointsPlayers[0] = battleground.getCardPowerOnBattlergroundInEndRoundForPlayer(battleground.getMeleeRowPlayerOne(), battleground.getRangeRowPlayerOne(), battleground.getSiegeRowPlayerOne());
+            pointsPlayers[1] = battleground.getCardPowerOnBattlergroundInEndRoundForPlayer(battleground.getMeleeRowPlayerTwo(), battleground.getRangeRowPlayerTwo(), battleground.getSiegeRowPlayerTwo());
+            //printMessageLogg(pointsPlayers, " is WINNER in Round " + round.getRound()," is WINNER in Round " + round.getRound(), "The round ended in a draw.");
+            printMessageLogg(pointsPlayers, playerOne.getName()+ " is WINNER Round "+ round.getRound() + ", with a score of " + pointsPlayers[0] + " : " + pointsPlayers[1] +"!",playerTwo.getName()+ " is WINNER Round" + round.getRound() + ", with a score of " + pointsPlayers[0] + " : " + pointsPlayers[1]+ "!", "The round ended in a draw, with a score of " + pointsPlayers[0] + " : " + pointsPlayers[1]+ "!");
 
     }
+
+
+    public void game()
+    {
+        logger.info("------------------------------Game START");
+        logger.info("Draw turn");
+        roundOfGame();
+
+
+        round.setRound(2);
+
+
+
+        roundOfGame();
+
+
+
+        if (pointsPlayers[0] == pointsPlayers[1])
+        {
+
+            round.setRound(3);
+            roundOfGame();
+        }
+
+        printMessageLogg(pointsPlayers, playerOne.getName()+ " is WINNER GAME, with a score of " + pointsPlayers[0] + " : " + pointsPlayers[1] +"!",playerTwo.getName()+ " is WINNER GAME, with a score of " + pointsPlayers[0] + " : " + pointsPlayers[1]+ "!", "The game ended in a draw, with a score of " + pointsPlayers[0] + " : " + pointsPlayers[1]+ "!");
+
+    }
+    private void printMessageLogg(int[] pointsPlayers, String messageOne, String messageTwo, String messageTрree)
+    {
+        if (pointsPlayers[0] > pointsPlayers[1]) logger.info(messageOne);
+        else if (pointsPlayers[0] < pointsPlayers[1]) logger.info(messageTwo);
+        else logger.info(messageTрree);
+    }
+
 
 }

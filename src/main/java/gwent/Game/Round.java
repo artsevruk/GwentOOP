@@ -7,6 +7,7 @@ public class Round {
 
     private int round;
     private boolean turn;
+    private boolean turnPass = false;
 
     public Round() {
         this.round = 1;
@@ -21,6 +22,10 @@ public class Round {
         return turn;
     }
 
+    public boolean getTurnPass() {
+        return turnPass;
+    }
+
     public void setRound(int round) {
         this.round = round;
     }
@@ -29,8 +34,13 @@ public class Round {
         this.turn = turn;
     }
 
+    public void setTurnPass(boolean turnPass) {
+        this.turnPass = turnPass;
+    }
+
     public boolean draw(){
         return Math.random() < 0.5;
     }
+
 
 }
