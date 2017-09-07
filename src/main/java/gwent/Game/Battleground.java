@@ -86,8 +86,6 @@ public class Battleground {
         {
             if (row.get(i) instanceof Creature){
                 cardPowerInRow = cardPowerInRow + ((Creature) row.get(i)).getCardPower();
-                System.out.println("cardPower + " + ((Creature) row.get(i)).getCardPower());
-                System.out.println("cardName + " + ((Creature) row.get(i)).getName());
             }
         }
         return cardPowerInRow;
@@ -104,7 +102,6 @@ public class Battleground {
         if (((Creature) card).getPosition() == roweble)
         {
             position.add(card);
-            System.out.println("card " + ((Creature) card).getPosition() + " add in list");
         }
     }
 
