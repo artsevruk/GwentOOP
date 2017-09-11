@@ -1,13 +1,14 @@
 import gwent.model.*;
 
 import gwent.model.Fraction.Monsters;
-import gwent.model.Fraction.NorthernRealm;
+
 import gwent.model.Fraction.Scoiatael;
 import gwent.service.Battleground;
 import gwent.service.Game;
 import gwent.service.Player;
 import gwent.service.Round;
 import org.apache.log4j.Logger;
+import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
 import java.io.IOException;
@@ -19,10 +20,15 @@ public class GameUseCaseTest {
 
     final static Logger logger = Logger.getLogger(GameUseCaseTest.class);
     Collection collection = new Collection();
-    Deck deckForPlayerOne = new Deck("Deck for Player One", new Monsters(), new Lord("Lord1", "Первый лорд", new Monsters(), Rarity.GOLD, 9));
-    Deck deckForPlayerTwo = new Deck("Deck for Player Two", new Scoiatael(), new Lord("Lord2", "Второй лорд", new Scoiatael(), Rarity.GOLD, 9));
+    Deck deckForPlayerOne = new Deck("Deck for Player One", new Monsters(), new Lord("Lord1", "Первый лорд", new Monsters(), 9));
+    Deck deckForPlayerTwo = new Deck("Deck for Player Two", new Scoiatael(), new Lord("Lord2", "Второй лорд", new Scoiatael(), 9));
 
-//"src/test/resources/DataTest/shouldBeConformityBetweenDigit.xls"
+    @BeforeTest
+    public void init() throws IOException {
+        //collection.initCollection();
+        //collection.addDecks(collection.deckGenerator("Deck on Monsters", new Monsters(), collection.getLordByFraction(new Monsters())));
+
+    }
 
 
     @Test
@@ -35,7 +41,7 @@ public class GameUseCaseTest {
         System.out.println("size coll: " + collection.getCards().size());
         collection.initCollection();
         System.out.println("size coll: " + collection.getCards().size());
-        Deck deck3 = collection.deckGenerator("Deck for Player Three", new NorthernRealm(), new Lord("Lord2", "Второй лорд", new NorthernRealm(), Rarity.GOLD, 9));
+        Deck deck3 = collection.deckGenerator("Deck on Monsters", new Monsters(), collection.getLordByFraction(new Monsters()));
         System.out.println(deck3.getCards().size());
         System.out.println("deck3.getLord().getFraction(): " + deck3.getLord().getFraction().getName());
         System.out.println("deck3.getLord().getName(): " + deck3.getLord().getName());
