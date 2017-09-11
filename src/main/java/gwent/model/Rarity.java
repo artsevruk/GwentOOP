@@ -1,4 +1,4 @@
-package gwent.Card;
+package gwent.model;
 
 
 /**

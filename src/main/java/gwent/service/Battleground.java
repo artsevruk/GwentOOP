@@ -1,11 +1,10 @@
-package gwent.Game;
+package gwent.service;
 
-import gwent.Card.*;
-import gwent.Card.Fraction.Monsters;
+import gwent.model.Card;
+import gwent.model.Creature;
+import gwent.model.Roweble;
 
 import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
 
 /**
  * Created by artsevruk on 05.09.2017.

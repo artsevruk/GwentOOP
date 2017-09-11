@@ -1,10 +1,9 @@
-package gwent.Game;
+package gwent.service;
 
-import gwent.Card.Card;
-import gwent.Card.Deck;
+import gwent.model.Card;
+import gwent.model.Deck;
 
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by artsevruk on 04.09.2017.
@@ -13,14 +12,14 @@ public class Player {
 
     private String name;
     private ArrayList<Card> cardsOnHand = new ArrayList<Card>();
-    private ArrayList<Card> deckOfDiscardedCards =new  ArrayList<Card>();
+    private ArrayList<Card> deckOfDiscardedCards = new ArrayList<Card>();
     private Deck deck;
 
     public Player(String name, Deck deck) {
         this.name = name;
         this.deck = deck;
         this.cardsOnHand = new ArrayList<Card>();
-        this.deckOfDiscardedCards =new  ArrayList<Card>();
+        this.deckOfDiscardedCards = new ArrayList<Card>();
     }
 
     public String getName() {
@@ -44,7 +43,7 @@ public class Player {
     }
 
     public void setCardsOnHand(ArrayList<Card> cardsOnHand) {
-        this.cardsOnHand =  cardsOnHand;
+        this.cardsOnHand = cardsOnHand;
     }
 
     public void setDeckOfDiscardedCards(ArrayList<Card> deckOfDiscardedCards) {

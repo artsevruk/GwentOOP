@@ -1,14 +1,11 @@
-package gwent.Card;
+package gwent.model;
 
-import gwent.Card.Card;
-import gwent.Card.Fraction.Fraction;
-import gwent.Card.Rarity;
-import gwent.Card.Roweble;
+import gwent.model.Fraction.Fraction;
 
 /**
  * Created by artsevruk on 04.09.2017.
  */
-public class Creature extends Card{
+public class Creature extends Card {
 
     protected int cardPower;
     protected Roweble position;

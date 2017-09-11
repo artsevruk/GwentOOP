@@ -1,9 +1,6 @@
-package gwent.Card;
+package gwent.model;
 
-import gwent.Card.Creature;
-import gwent.Card.Fraction.Fraction;
-import gwent.Card.Rarity;
-import gwent.Card.Roweble;
+import gwent.model.Fraction.Fraction;
 
 /**
  * Created by artsevruk on 04.09.2017.

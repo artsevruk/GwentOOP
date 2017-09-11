@@ -1,4 +1,4 @@
-package gwent.Card;
+package gwent.model;
 
 /**
  * Created by artsevruk on 04.09.2017.

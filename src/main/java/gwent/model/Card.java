@@ -1,6 +1,6 @@
-package gwent.Card;
+package gwent.model;
 
-import gwent.Card.Fraction.Fraction;
+import gwent.model.Fraction.Fraction;
 import gwent.Id;
 
 /**

@@ -1,4 +1,4 @@
-package gwent.Card.Fraction;
+package gwent.model.Fraction;
 
 /**
  * Created by artsevruk on 04.09.2017.

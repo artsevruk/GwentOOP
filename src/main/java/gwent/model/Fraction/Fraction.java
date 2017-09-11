@@ -1,4 +1,4 @@
-package gwent.Card.Fraction;
+package gwent.model.Fraction;
 
 
 import gwent.Id;

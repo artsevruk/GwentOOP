@@ -1,4 +1,4 @@
-package gwent.Game;
+package gwent.service;
 
 /**
  * Created by artsevruk on 04.09.2017.
