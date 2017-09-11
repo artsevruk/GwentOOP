@@ -7,7 +7,7 @@ import gwent.model.Fraction.Fraction;
  */
 public class Lord extends Creature {
 
-    public Lord(String name, String description, Fraction fraction, Rarity rarity, int cardPower) {
-        super(name, description, fraction, rarity, cardPower, Roweble.LEADER);
+    public Lord(String name, String description, Fraction fraction, int cardPower) {
+        super(name, description, fraction, Rarity.GOLD, cardPower, Roweble.ANYROW);
     }
 }

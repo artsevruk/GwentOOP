@@ -1,6 +1,8 @@
 package gwent.model;
 
 import gwent.model.Fraction.*;
+import gwent.service.util.Reader;
+import org.apache.log4j.Logger;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -10,6 +12,8 @@ import java.util.List;
  * Created by artsevruk on 04.09.2017.
  */
 public class Collection {
+    final static Logger logger = Logger.getLogger(Collection.class);
+
     protected ArrayList<Card> cards = new ArrayList<Card>();
     protected ArrayList<Lord> lords = new ArrayList<Lord>();
     protected ArrayList<Deck> decks = new ArrayList<Deck>();
@@ -20,6 +24,15 @@ public class Collection {
 
     public ArrayList<Lord> getLords() {
         return lords;
+    }
+
+    public Lord getLordByFraction(Fraction fraction) {
+        for (int i = 0; i < lords.size(); i++) {
+            if (lords.get(i).getFraction().equals(fraction.getName())) {
+                return lords.get(i);
+            }
+        }
+        return lords.get(0);
     }
 
     public List<Deck> getDecks() {
@@ -81,17 +94,31 @@ public class Collection {
 
     public void initCollection() throws IOException {
         Reader reader = new Reader();
-        ArrayList<String> nameCard = reader.readOfCatlogInList("src/test/resources/DataCards/DataCards.xls", 0, 0);
-        ArrayList<String> descriptionCard = reader.readOfCatlogInList("src/test/resources/DataCards/DataCards.xls", 0, 1);
-        ArrayList<String> fractionCard = reader.readOfCatlogInList("src/test/resources/DataCards/DataCards.xls", 0, 2);
-        ArrayList<String> rarityCard = reader.readOfCatlogInList("src/test/resources/DataCards/DataCards.xls", 0, 3);
-        ArrayList<String> powerCard = reader.readOfCatlogInList("src/test/resources/DataCards/DataCards.xls", 0, 4);
-        ArrayList<String> rowebleCard = reader.readOfCatlogInList("src/test/resources/DataCards/DataCards.xls", 0, 5);
+        ArrayList<String> nameCards = reader.readOfCatlogInList("src/test/resources/DataCards/DataCards.xls", 0, 0);
+        ArrayList<String> descriptionCards = reader.readOfCatlogInList("src/test/resources/DataCards/DataCards.xls", 0, 1);
+        ArrayList<String> fractionCards = reader.readOfCatlogInList("src/test/resources/DataCards/DataCards.xls", 0, 2);
+        ArrayList<String> rarityCards = reader.readOfCatlogInList("src/test/resources/DataCards/DataCards.xls", 0, 3);
+        ArrayList<String> powerCards = reader.readOfCatlogInList("src/test/resources/DataCards/DataCards.xls", 0, 4);
+        ArrayList<String> rowebleCards = reader.readOfCatlogInList("src/test/resources/DataCards/DataCards.xls", 0, 5);
+        ArrayList<String> leaderName = reader.readOfCatlogInList("src/test/resources/DataCards/DataCards.xls", 1, 0);
+        ArrayList<String> leaderDescrip = reader.readOfCatlogInList("src/test/resources/DataCards/DataCards.xls", 1, 1);
+        ArrayList<String> leaderFraction = reader.readOfCatlogInList("src/test/resources/DataCards/DataCards.xls", 1, 2);
+        ArrayList<String> leaderPower = reader.readOfCatlogInList("src/test/resources/DataCards/DataCards.xls", 1, 3);
 
-        for (int i = 0; i < nameCard.size(); i++) {
-            cards.add(new Creature(nameCard.get(i), descriptionCard.get(i), howFraction(fractionCard.get(i)), howRarity(rarityCard.get(i)), Integer.parseInt(powerCard.get(i).substring(0, powerCard.get(0).length() - 2)), howRoweble(rowebleCard.get(i))));
+        for (int i = 0; i < nameCards.size(); i++) {
+            cards.add(new Creature(nameCards.get(i), descriptionCards.get(i), howFraction(fractionCards.get(i)), howRarity(rarityCards.get(i)), Integer.parseInt(powerCards.get(i).substring(0, powerCards.get(0).length() - 2)), howRoweble(rowebleCards.get(i))));
         }
+        logger.info("Cards are added to the collection successfully! Amount cards: " + getCards().size());
+        System.out.println("Cards are added to the collection successfully! Amount cards: " + getCards().size());
+        for (int i = 0; i < leaderName.size(); i++) {
+            lords.add(new Lord(leaderName.get(i), leaderDescrip.get(i), howFraction(leaderFraction.get(i)), Integer.parseInt(powerCards.get(i).substring(0, powerCards.get(0).length() - 2))));
+
+        }
+
+        logger.info("Leaders are added to the collection successfully! Amount leaders: " + getLords().size());
+        System.out.println("Leaders are added to the collection successfully! Amount leaders: " + getLords().size());
     }
+
 
     public Deck deckGenerator(String name, Fraction fraction, Lord lord) {
         int counterMinCards = 0;

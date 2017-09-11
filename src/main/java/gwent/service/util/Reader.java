@@ -1,4 +1,4 @@
-package gwent.model;
+package gwent.service.util;
 
 import org.apache.log4j.Logger;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;

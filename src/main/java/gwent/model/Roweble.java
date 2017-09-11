@@ -8,5 +8,4 @@ public enum Roweble {
     RANGE,
     SIEGE,
     ANYROW,
-    LEADER;
 }
