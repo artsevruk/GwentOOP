@@ -13,11 +13,17 @@ public class Battleground {
     private static Battleground ourInstance = new Battleground();
 
     private ArrayList<Card> meleeRowPlayerOne = new ArrayList<Card>();
+    private int meleeRowPlayerOnePower;
     private ArrayList<Card> rangeRowPlayerOne = new ArrayList<Card>();
+    private int rangeRowPlayerOnePower;
     private ArrayList<Card> siegeRowPlayerOne = new ArrayList<Card>();
+    private int siegeRowPlayerOnePower;
     private ArrayList<Card> meleeRowPlayerTwo = new ArrayList<Card>();
+    private int meleeRowPlayerTwoPower;
     private ArrayList<Card> rangeRowPlayerTwo = new ArrayList<Card>();
+    private int rangeRowPlayerTwoPower;
     private ArrayList<Card> siegeRowPlayerTwo = new ArrayList<Card>();
+    private int siegeRowPlayerTwoPower;
 
 
     private Battleground() {

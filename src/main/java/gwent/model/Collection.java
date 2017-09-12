@@ -15,24 +15,24 @@ public class Collection {
     final static Logger logger = Logger.getLogger(Collection.class);
 
     protected ArrayList<Card> cards = new ArrayList<Card>();
-    protected ArrayList<Lord> lords = new ArrayList<Lord>();
+    protected ArrayList<Leader> leaders = new ArrayList<Leader>();
     protected ArrayList<Deck> decks = new ArrayList<Deck>();
 
     public List<Card> getCards() {
         return cards;
     }
 
-    public ArrayList<Lord> getLords() {
-        return lords;
+    public ArrayList<Leader> getLeaders() {
+        return leaders;
     }
 
-    public Lord getLordByFraction(Fraction fraction) {
-        for (int i = 0; i < lords.size(); i++) {
-            if (lords.get(i).getFraction().equals(fraction.getName())) {
-                return lords.get(i);
+    public Leader getLeaderByFraction(Fraction fraction) {
+        for (int i = 0; i < leaders.size(); i++) {
+            if (leaders.get(i).getFraction().equals(fraction.getName())) {
+                return leaders.get(i);
             }
         }
-        return lords.get(0);
+        return leaders.get(0);
     }
 
     public List<Deck> getDecks() {
@@ -50,8 +50,8 @@ public class Collection {
         }
     }
 
-    public void addLords(Lord lord) {
-        this.lords.add(lord);
+    public void addLords(Leader leader) {
+        this.leaders.add(leader);
     }
 
     public void addDecks(Deck deck) {
@@ -111,26 +111,46 @@ public class Collection {
         logger.info("Cards are added to the collection successfully! Amount cards: " + getCards().size());
         System.out.println("Cards are added to the collection successfully! Amount cards: " + getCards().size());
         for (int i = 0; i < leaderName.size(); i++) {
-            lords.add(new Lord(leaderName.get(i), leaderDescrip.get(i), howFraction(leaderFraction.get(i)), Integer.parseInt(powerCards.get(i).substring(0, powerCards.get(0).length() - 2))));
-
+            leaders.add(new Leader(leaderName.get(i), leaderDescrip.get(i), howFraction(leaderFraction.get(i)), Integer.parseInt(leaderPower.get(i).substring(0, leaderPower.get(0).length() - 2))));
         }
 
-        logger.info("Leaders are added to the collection successfully! Amount leaders: " + getLords().size());
-        System.out.println("Leaders are added to the collection successfully! Amount leaders: " + getLords().size());
+        logger.info("Leaders are added to the collection successfully! Amount leaders: " + getLeaders().size());
+        System.out.println("Leaders are added to the collection successfully! Amount leaders: " + getLeaders().size());
     }
 
-
-    public Deck deckGenerator(String name, Fraction fraction, Lord lord) {
+    public Deck deckGenerator(String name, Fraction fraction, Leader leader) {
         int counterMinCards = 0;
-        Deck deck = new Deck(name, fraction, lord);
+        Deck deck = new Deck(name, fraction, leader);
 
         for (int i = 0; counterMinCards < 20; i++) {
             if (cards.get(i).getFraction().getName().equals(fraction.getName())) {
                 deck.addCardInDeck(cards.get(i));
                 counterMinCards++;
+
             }
         }
+        logger.info("Deck " + name + " created! ");
+        System.out.println("Deck " + name + " created! ");
         return deck;
+    }
+
+    public void printCollection()
+    {
+        for (int i =0; i < cards.size(); i++)
+        {
+            logger.info("Card name: " + cards.get(i).getName() + ", Fraction: " + cards.get(i).getFraction().getName() + " Rarity: " + cards.get(i).getRarity());
+            System.out.println("Card name: " + cards.get(i).getName() + ", Fraction: " + cards.get(i).getFraction().getName() + " Rarity: " + cards.get(i).getRarity());
+        }
+        for (int i =0; i < decks.size(); i++)
+        {
+            logger.info("Deck name: " + decks.get(i).getName() + ", Fraction: " + decks.get(i).getFraction().getName());
+            System.out.println("Deck name: " + decks.get(i).getName() + ", Fraction: " + decks.get(i).getFraction().getName());
+        }
+        for (int i =0; i < leaders.size(); i++)
+        {
+            logger.info("Leader name: " + leaders.get(i).getName() + ", Fraction: " + leaders.get(i).getFraction().getName() + " Rarity: " + leaders.get(i).getRarity());
+            System.out.println("Leader name: " + leaders.get(i).getName() + ", Fraction: " + leaders.get(i).getFraction().getName() + " Rarity: " + leaders.get(i).getRarity());
+        }
     }
 
 }

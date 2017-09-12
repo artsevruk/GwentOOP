@@ -1,7 +1,7 @@
 import gwent.model.*;
 
 import gwent.model.Fraction.Monsters;
-
+import gwent.model.Fraction.NorthernRealm;
 import gwent.model.Fraction.Scoiatael;
 import gwent.service.Battleground;
 import gwent.service.Game;
@@ -20,8 +20,7 @@ public class GameUseCaseTest {
 
     final static Logger logger = Logger.getLogger(GameUseCaseTest.class);
     Collection collection = new Collection();
-    Deck deckForPlayerOne = new Deck("Deck for Player One", new Monsters(), new Lord("Lord1", "Первый лорд", new Monsters(), 9));
-    Deck deckForPlayerTwo = new Deck("Deck for Player Two", new Scoiatael(), new Lord("Lord2", "Второй лорд", new Scoiatael(), 9));
+    Battleground battleground = Battleground.getInstance();
 
     @BeforeTest
     public void init() throws IOException {
@@ -33,34 +32,49 @@ public class GameUseCaseTest {
 
     @Test
     public void testReader() throws IOException {
-        //Reader reader = new Reader();
-        //ArrayList<String> strReader = reader.readOfCatlogInList("src/test/resources/DataCards/DataCards.xls",0,4);
-        //System.out.println(strReader.size());
-        //System.out.println(Integer.parseInt(strReader.get(0).substring(0,strReader.get(0).length()-2)));
-        //System.out.println(strReader.get(1));
-        System.out.println("size coll: " + collection.getCards().size());
-        collection.initCollection();
-        System.out.println("size coll: " + collection.getCards().size());
-        Deck deck3 = collection.deckGenerator("Deck on Monsters", new Monsters(), collection.getLordByFraction(new Monsters()));
-        System.out.println(deck3.getCards().size());
-        System.out.println("deck3.getLord().getFraction(): " + deck3.getLord().getFraction().getName());
-        System.out.println("deck3.getLord().getName(): " + deck3.getLord().getName());
-        System.out.println("deck3.getLord().getFraction(): " + deck3.getFraction().getName());
+
+
     }
 
 
     @Test
-    public void game() {
+    public void game() throws IOException {
 
-        Player playerOne = new Player("PlayerOne", deckForPlayerOne);
-        Player playerTwo = new Player("PlayerTwo", deckForPlayerTwo);
 
-        Battleground battleground = Battleground.getInstance();
+        collection.initCollection();
+
+        Deck deckOfMonsters = collection.deckGenerator("Deck on Monsters", new Monsters(), collection.getLeaderByFraction(new Monsters()));
+
+
+        Spell spell1 = new Spell("qqq1","www1", new Monsters(), Rarity.GOLD, 1,5);
+        Spell spell2 = new Spell("qqq2","www2", new Monsters(), Rarity.GOLD,2,1);
+        Spell spell3 = new Spell("qqq3","www3", new Monsters(), Rarity.GOLD,3,2);
+        Spell spell4 = new Spell("qqq4","www4", new Monsters(), Rarity.GOLD,4,1);
+        deckOfMonsters.addCardInDeck(spell1);
+        deckOfMonsters.addCardInDeck(spell2);
+        deckOfMonsters.addCardInDeck(spell3);
+        deckOfMonsters.addCardInDeck(spell4);
+
+
+
+
+
+
+        Deck deckOfNorthernRealm = collection.deckGenerator("Deck on NorthernRealm", new NorthernRealm(), collection.getLeaderByFraction(new NorthernRealm()));
+        collection.addDecks(deckOfMonsters);
+        collection.addDecks(deckOfNorthernRealm);
+        //collection.printCollection();
+        System.out.println(deckOfMonsters.getCards().size());
+        System.out.println(deckOfNorthernRealm.getCards().size());
+
+        Player playerOne = new Player("PlayerOne", deckOfMonsters);
+        Player playerTwo = new Player("PlayerTwo", deckOfNorthernRealm);
 
         Game game = new Game(battleground, playerOne, playerTwo, new Round());
 
-        //game.game();
+        game.game();
+
+
 
     }
-
 }

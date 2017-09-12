@@ -1,6 +1,5 @@
 package gwent.model;
 
-import gwent.Id;
 import gwent.model.Fraction.Fraction;
 import org.apache.log4j.Logger;
 
@@ -17,12 +16,12 @@ public class Deck extends Id {
     protected String name;
     protected Fraction fraction;
     protected List<Card> cards = new ArrayList<Card>();
-    protected Lord lord;
+    protected Leader leader;
 
-    public Deck(String name, Fraction fraction, Lord lord) {
+    public Deck(String name, Fraction fraction, Leader leader) {
         this.name = name;
         this.fraction = fraction;
-        this.lord = lord;
+        this.leader = leader;
     }
 
     public Deck(String name) {
@@ -37,8 +36,8 @@ public class Deck extends Id {
         return cards;
     }
 
-    public Lord getLord() {
-        return lord;
+    public Leader getLeader() {
+        return leader;
     }
 
     public Fraction getFraction() {
@@ -49,8 +48,8 @@ public class Deck extends Id {
         this.name = name;
     }
 
-    public void setLord(Lord lord) {
-        this.lord = lord;
+    public void setLeader(Leader leader) {
+        this.leader = leader;
     }
 
     public void setCards(Card card) {
@@ -72,7 +71,7 @@ public class Deck extends Id {
                 if (counterSilver <= 6) {
                     cards.add(card);
                     counterSilver++;
-                    logger.info(" added in deck " + card.getName() + " is rarity a " + card.getRarity());
+                    //logger.info(" added in deck " + card.getName() + " is rarity a " + card.getRarity());
                 }
 
             } else if (card.getRarity().equals(Rarity.GOLD)) {
@@ -84,7 +83,7 @@ public class Deck extends Id {
 
             } else {
                 cards.add(card);
-                logger.info(" added in deck " + card.getName() + " is rarity a " + card.getRarity());
+                //logger.info(" added in deck " + card.getName() + " is rarity a " + card.getRarity());
             }
 
         } else
@@ -97,9 +96,9 @@ public class Deck extends Id {
         }
     }
 
-    public void addLordInDeck(Lord lord) {
-        if (this.fraction.equals(lord.getFraction())) {
-            this.lord = lord;
+    public void addLordInDeck(Leader leader) {
+        if (this.fraction.equals(leader.getFraction())) {
+            this.leader = leader;
         }
     }
 

@@ -2,6 +2,7 @@ package gwent.service;
 
 import gwent.model.Card;
 import gwent.model.Deck;
+import gwent.model.Leader;
 
 import java.util.ArrayList;
 
@@ -18,8 +19,6 @@ public class Player {
     public Player(String name, Deck deck) {
         this.name = name;
         this.deck = deck;
-        this.cardsOnHand = new ArrayList<Card>();
-        this.deckOfDiscardedCards = new ArrayList<Card>();
     }
 
     public String getName() {
@@ -38,19 +37,21 @@ public class Player {
         return deck;
     }
 
+
     public void setName(String name) {
         this.name = name;
+    }
+
+    public void setDeck(Deck deck) {
+        this.deck = deck;
     }
 
     public void setCardsOnHand(ArrayList<Card> cardsOnHand) {
         this.cardsOnHand = cardsOnHand;
     }
 
-    public void setDeckOfDiscardedCards(ArrayList<Card> deckOfDiscardedCards) {
-        this.deckOfDiscardedCards = deckOfDiscardedCards;
+    public void setDeckOfDiscardedCards(Card deckOfDiscardedCards) {
+        this.deckOfDiscardedCards.add(deckOfDiscardedCards);
     }
 
-    public void setDeck(Deck deck) {
-        this.deck = deck;
-    }
 }

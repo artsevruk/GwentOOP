@@ -1,7 +1,7 @@
 package gwent.model.Fraction;
 
 
-import gwent.Id;
+import gwent.model.Id;
 
 /**
  * Created by artsevruk on 04.09.2017.
