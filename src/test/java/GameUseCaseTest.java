@@ -40,30 +40,16 @@ public class GameUseCaseTest {
     @Test
     public void game() throws IOException {
 
-
         collection.initCollection();
 
         Deck deckOfMonsters = collection.deckGenerator("Deck on Monsters", new Monsters(), collection.getLeaderByFraction(new Monsters()));
-
-
-        Spell spell1 = new Spell("qqq1","www1", new Monsters(), Rarity.GOLD, 1,5);
-        Spell spell2 = new Spell("qqq2","www2", new Monsters(), Rarity.GOLD,2,1);
-        Spell spell3 = new Spell("qqq3","www3", new Monsters(), Rarity.GOLD,3,2);
-        Spell spell4 = new Spell("qqq4","www4", new Monsters(), Rarity.GOLD,4,1);
-        deckOfMonsters.addCardInDeck(spell1);
-        deckOfMonsters.addCardInDeck(spell2);
-        deckOfMonsters.addCardInDeck(spell3);
-        deckOfMonsters.addCardInDeck(spell4);
-
-
-
-
-
-
         Deck deckOfNorthernRealm = collection.deckGenerator("Deck on NorthernRealm", new NorthernRealm(), collection.getLeaderByFraction(new NorthernRealm()));
         collection.addDecks(deckOfMonsters);
         collection.addDecks(deckOfNorthernRealm);
+
+
         //collection.printCollection();
+
         System.out.println(deckOfMonsters.getCards().size());
         System.out.println(deckOfNorthernRealm.getCards().size());
 

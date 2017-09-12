@@ -104,18 +104,30 @@ public class Collection {
         ArrayList<String> leaderDescrip = reader.readOfCatlogInList("src/test/resources/DataCards/DataCards.xls", 1, 1);
         ArrayList<String> leaderFraction = reader.readOfCatlogInList("src/test/resources/DataCards/DataCards.xls", 1, 2);
         ArrayList<String> leaderPower = reader.readOfCatlogInList("src/test/resources/DataCards/DataCards.xls", 1, 3);
+        ArrayList<String> nameSpell = reader.readOfCatlogInList("src/test/resources/DataCards/DataCards.xls", 2, 0);
+        ArrayList<String> descriptionSpell = reader.readOfCatlogInList("src/test/resources/DataCards/DataCards.xls", 2, 1);
+        ArrayList<String> fractionSpell = reader.readOfCatlogInList("src/test/resources/DataCards/DataCards.xls", 2, 2);
+        ArrayList<String> raritySpell = reader.readOfCatlogInList("src/test/resources/DataCards/DataCards.xls", 2, 3);
+        ArrayList<String> numberBuff = reader.readOfCatlogInList("src/test/resources/DataCards/DataCards.xls", 2, 4);
+        ArrayList<String> buff = reader.readOfCatlogInList("src/test/resources/DataCards/DataCards.xls", 2, 5);
 
         for (int i = 0; i < nameCards.size(); i++) {
             cards.add(new Creature(nameCards.get(i), descriptionCards.get(i), howFraction(fractionCards.get(i)), howRarity(rarityCards.get(i)), Integer.parseInt(powerCards.get(i).substring(0, powerCards.get(0).length() - 2)), howRoweble(rowebleCards.get(i))));
         }
-        logger.info("Cards are added to the collection successfully! Amount cards: " + getCards().size());
-        System.out.println("Cards are added to the collection successfully! Amount cards: " + getCards().size());
+
         for (int i = 0; i < leaderName.size(); i++) {
-            leaders.add(new Leader(leaderName.get(i), leaderDescrip.get(i), howFraction(leaderFraction.get(i)), Integer.parseInt(leaderPower.get(i).substring(0, leaderPower.get(0).length() - 2))));
+            leaders.add(new Leader(leaderName.get(i), leaderDescrip.get(i), howFraction(leaderFraction.get(i)), Integer.parseInt(leaderPower.get(i).substring(0, leaderPower.get(0).length() - 2)) ));
         }
 
         logger.info("Leaders are added to the collection successfully! Amount leaders: " + getLeaders().size());
         System.out.println("Leaders are added to the collection successfully! Amount leaders: " + getLeaders().size());
+
+        for (int i = 0; i < nameSpell.size(); i++) {
+            cards.add(new Spell(nameSpell.get(i), descriptionSpell.get(i), howFraction(fractionSpell.get(i)), howRarity(raritySpell.get(i)), Integer.parseInt(numberBuff.get(i).substring(0, numberBuff.get(0).length() - 2)), Integer.parseInt(buff.get(i).substring(0, buff.get(0).length() - 2))));
+        }
+        logger.info("Cards are added to the collection successfully! Amount cards: " + getCards().size());
+        System.out.println("Cards are added to the collection successfully! Amount cards: " + getCards().size());
+
     }
 
     public Deck deckGenerator(String name, Fraction fraction, Leader leader) {

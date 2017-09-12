@@ -6,6 +6,7 @@ import gwent.model.Creature;
 import gwent.model.Spell;
 import org.apache.log4j.Logger;
 
+import java.util.ArrayList;
 import java.util.Random;
 
 /**
@@ -99,6 +100,11 @@ public class Game {
         if (cardOnDesk instanceof Creature) ((Creature) cardOnDesk).setCardPower(((Creature) cardOnDesk).getCardPower()+((Spell) card).getBuf());
     }
 
+    private void turnSpell(Card card, ArrayList<Card> mellePosition, ArrayList<Card> rangePosition, ArrayList<Card> siegePosition )
+    {
+
+    }
+
     public void turnPlayerOne() {
 
 
@@ -134,9 +140,9 @@ public class Game {
                     }
                 }else if (((Spell) card).getNumberRow() == 3)
                 {
-                    for (int i = 0; i < battleground.getRangeRowPlayerOne().size(); i++)
+                    for (int i = 0; i < battleground.getSiegeRowPlayerOne().size(); i++)
                     {
-                        Card cardOnDesk = battleground.getRangeRowPlayerOne().get(i);
+                        Card cardOnDesk = battleground.getSiegeRowPlayerOne().get(i);
                         rowBuff(card, cardOnDesk);
                         logger.info(playerOne.getName() + " using Spell card"+ " - " + card.getName() + " " + card.getFraction().getName() + " +" + ((Spell) card).getBuf() +" all cards in siege row");
                     }
@@ -152,12 +158,46 @@ public class Game {
     private void turnPlayerTwo() {
         if (playerTwo.getCardsOnHand().size() > 0) {
 
+
             int numberCardForPlayerTwo = randomNumber(playerTwo.getCardsOnHand().size());
             Card card = playerTwo.getCardsOnHand().get(numberCardForPlayerTwo);
-            battleground.putCardOnBattleground(card, battleground.getMeleeRowPlayerTwo(), battleground.getSiegeRowPlayerTwo(), battleground.getSiegeRowPlayerTwo());
+            if (card instanceof Creature)
+            {
+
+                battleground.putCardOnBattleground(card, battleground.getMeleeRowPlayerTwo(), battleground.getRangeRowPlayerTwo(), battleground.getSiegeRowPlayerTwo());
+                logger.info(playerTwo.getName() + " turn card on battleground: " + card.getName() + " " + card.getFraction().getName() + ", power is " + ((Creature) card).getCardPower() + ", on position " + ((Creature) card).getPosition());
+
+            }else if (card instanceof Spell)
+            {
+                if (((Spell) card).getNumberRow() == 1)
+                {
+
+                    for (int i = 0; i < battleground.getMeleeRowPlayerTwo().size(); i++)
+                    {
+                        rowBuff(card, battleground.getMeleeRowPlayerTwo().get(i));
+                        logger.info(playerTwo.getName() + " using Spell card"+ " - " + card.getName() + " " + card.getFraction().getName() + " +" + ((Spell) card).getBuf() +" all cards in melle row");
+                    }
+                }else if (((Spell) card).getNumberRow() == 2)
+                {
+                    for (int i = 0; i < battleground.getRangeRowPlayerTwo().size(); i++)
+                    {
+                        rowBuff(card, battleground.getRangeRowPlayerTwo().get(i));
+                        logger.info(playerTwo.getName() + " using Spell card"+ " - " + card.getName() + " " + card.getFraction().getName() + " +" + ((Spell) card).getBuf() +" all cards in range row");
+                    }
+                }else if (((Spell) card).getNumberRow() == 3)
+                {
+                    for (int i = 0; i < battleground.getSiegeRowPlayerTwo().size(); i++)
+                    {
+                        rowBuff(card, battleground.getSiegeRowPlayerTwo().get(i));
+                        logger.info(playerTwo.getName() + " using Spell card"+ " - " + card.getName() + " " + card.getFraction().getName() + " +" + ((Spell) card).getBuf() +" all cards in siege row");
+                    }
+                }
+            }
+
             playerTwo.getCardsOnHand().remove(numberCardForPlayerTwo);
-            logger.info(playerTwo.getName() + " turn card on battleground: " + card.getName() + " " + card.getFraction().getName() + ", power is " + ((Creature) card).getCardPower() + ", on position " + ((Creature) card).getPosition());
         } else round.setTurnPass(true);
+
+
     }
 
     private void isPassed(int counter, int numberTurn, Player player) {
