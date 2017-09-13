@@ -3,6 +3,7 @@ import gwent.model.*;
 import gwent.model.Fraction.Monsters;
 import gwent.model.Fraction.NorthernRealm;
 import gwent.model.Fraction.Scoiatael;
+import gwent.model.Fraction.Skellige;
 import gwent.service.Battleground;
 import gwent.service.Game;
 import gwent.service.Player;
@@ -22,23 +23,30 @@ public class GameUseCaseTest {
     Collection collection = new Collection();
     Battleground battleground = Battleground.getInstance();
 
+    public GameUseCaseTest() throws IOException {
+    }
+
     @BeforeTest
     public void init() throws IOException {
-        //collection.initCollection();
-        //collection.addDecks(collection.deckGenerator("Deck on Monsters", new Monsters(), collection.getLordByFraction(new Monsters())));
-
-    }
-
-
-    @Test
-    public void testReader() throws IOException {
 
 
     }
 
+    @Test
+    public void createCollectionUseCaseTest() throws IOException {
+        Collection newCollection = new Collection();
+        newCollection.printCollection();
+    }
 
     @Test
-    public void game() throws IOException {
+    public void deckGenerateUseCaseTest() throws IOException {
+
+        collection.addDecks(collection.deckGenerator("First deck on deckGenerator", new Skellige(), collection.getLeaderByFraction(new Skellige())));
+    }
+
+
+    @Test
+    public void gameUseCaseTest() throws IOException {
 
         collection.initCollection();
 
@@ -46,9 +54,6 @@ public class GameUseCaseTest {
         Deck deckOfNorthernRealm = collection.deckGenerator("Deck on NorthernRealm", new NorthernRealm(), collection.getLeaderByFraction(new NorthernRealm()));
         collection.addDecks(deckOfMonsters);
         collection.addDecks(deckOfNorthernRealm);
-
-
-        //collection.printCollection();
 
         System.out.println(deckOfMonsters.getCards().size());
         System.out.println(deckOfNorthernRealm.getCards().size());

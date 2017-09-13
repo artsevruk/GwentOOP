@@ -95,13 +95,12 @@ public class Game {
         return (int) (Math.random() * max);
     }
 
-    private void rowBuff(Card card, Card cardOnDesk)
-    {
-        if (cardOnDesk instanceof Creature) ((Creature) cardOnDesk).setCardPower(((Creature) cardOnDesk).getCardPower()+((Spell) card).getBuf());
+    private void rowBuff(Card card, Card cardOnDesk) {
+        if (cardOnDesk instanceof Creature)
+            ((Creature) cardOnDesk).setCardPower(((Creature) cardOnDesk).getCardPower() + ((Spell) card).getBuf());
     }
 
-    private void turnSpell(Card card, ArrayList<Card> mellePosition, ArrayList<Card> rangePosition, ArrayList<Card> siegePosition )
-    {
+    private void turnSpell(Card card, ArrayList<Card> mellePosition, ArrayList<Card> rangePosition, ArrayList<Card> siegePosition) {
 
     }
 
@@ -113,39 +112,31 @@ public class Game {
 
             int numberCardForPlayerOne = randomNumber(playerOne.getCardsOnHand().size());
             Card card = playerOne.getCardsOnHand().get(numberCardForPlayerOne);
-            if (card instanceof Creature)
-            {
+            if (card instanceof Creature) {
 
                 battleground.putCardOnBattleground(card, battleground.getMeleeRowPlayerOne(), battleground.getRangeRowPlayerOne(), battleground.getSiegeRowPlayerOne());
-                logger.info(playerOne.getName() + " turn card on battleground: " + card.getName() + " " + card.getFraction().getName() + ", power is " + ((Creature) card).getCardPower() + ", on position " + ((Creature) card).getPosition());
+                logger.info(playerOne.getName() + " turn card Creature: " + card.getName() + " " + card.getFraction().getName() + ", power is " + ((Creature) card).getCardPower() + ", on position " + ((Creature) card).getPosition());
 
-            }else if (card instanceof Spell)
-            {
-                if (((Spell) card).getNumberRow() == 1)
-                {
+            } else if (card instanceof Spell) {
+                if (((Spell) card).getNumberRow() == 1) {
 
-                    for (int i = 0; i < battleground.getMeleeRowPlayerOne().size(); i++)
-                    {
+                    for (int i = 0; i < battleground.getMeleeRowPlayerOne().size(); i++) {
                         Card cardOnDesk = battleground.getMeleeRowPlayerOne().get(i);
                         rowBuff(card, cardOnDesk);
-                        logger.info(playerOne.getName() + " using Spell card"+ " - " + card.getName() + " " + card.getFraction().getName() + " +" + ((Spell) card).getBuf() +" all cards in melle row");
                     }
-                }else if (((Spell) card).getNumberRow() == 2)
-                {
-                    for (int i = 0; i < battleground.getRangeRowPlayerOne().size(); i++)
-                    {
+                    logger.info(playerOne.getName() + " using Spell card" + " - " + card.getName() + " " + card.getFraction().getName() + " +" + ((Spell) card).getBuf() + " all cards in melle row");
+                } else if (((Spell) card).getNumberRow() == 2) {
+                    for (int i = 0; i < battleground.getRangeRowPlayerOne().size(); i++) {
                         Card cardOnDesk = battleground.getRangeRowPlayerOne().get(i);
                         rowBuff(card, cardOnDesk);
-                        logger.info(playerOne.getName() + " using Spell card"+ " - " + card.getName() + " " + card.getFraction().getName() + " +" + ((Spell) card).getBuf() +" all cards in range row");
                     }
-                }else if (((Spell) card).getNumberRow() == 3)
-                {
-                    for (int i = 0; i < battleground.getSiegeRowPlayerOne().size(); i++)
-                    {
+                    logger.info(playerOne.getName() + " using Spell card" + " - " + card.getName() + " " + card.getFraction().getName() + " +" + ((Spell) card).getBuf() + " all cards in range row");
+                } else if (((Spell) card).getNumberRow() == 3) {
+                    for (int i = 0; i < battleground.getSiegeRowPlayerOne().size(); i++) {
                         Card cardOnDesk = battleground.getSiegeRowPlayerOne().get(i);
                         rowBuff(card, cardOnDesk);
-                        logger.info(playerOne.getName() + " using Spell card"+ " - " + card.getName() + " " + card.getFraction().getName() + " +" + ((Spell) card).getBuf() +" all cards in siege row");
                     }
+                    logger.info(playerOne.getName() + " using Spell card" + " - " + card.getName() + " " + card.getFraction().getName() + " +" + ((Spell) card).getBuf() + " all cards in siege row");
                 }
                 //logger.info(playerOne.getName() + " turn card on battleground: " + card.getClass().getName()+ " - " + card.getName() + " " + card.getFraction().getName() );
             }
@@ -157,40 +148,28 @@ public class Game {
 
     private void turnPlayerTwo() {
         if (playerTwo.getCardsOnHand().size() > 0) {
-
-
             int numberCardForPlayerTwo = randomNumber(playerTwo.getCardsOnHand().size());
             Card card = playerTwo.getCardsOnHand().get(numberCardForPlayerTwo);
-            if (card instanceof Creature)
-            {
-
+            if (card instanceof Creature) {
                 battleground.putCardOnBattleground(card, battleground.getMeleeRowPlayerTwo(), battleground.getRangeRowPlayerTwo(), battleground.getSiegeRowPlayerTwo());
-                logger.info(playerTwo.getName() + " turn card on battleground: " + card.getName() + " " + card.getFraction().getName() + ", power is " + ((Creature) card).getCardPower() + ", on position " + ((Creature) card).getPosition());
+                logger.info(playerTwo.getName() + " turn card Creature: " + card.getName() + " " + card.getFraction().getName() + ", power is " + ((Creature) card).getCardPower() + ", on position " + ((Creature) card).getPosition());
 
-            }else if (card instanceof Spell)
-            {
-                if (((Spell) card).getNumberRow() == 1)
-                {
-
-                    for (int i = 0; i < battleground.getMeleeRowPlayerTwo().size(); i++)
-                    {
+            } else if (card instanceof Spell) {
+                if (((Spell) card).getNumberRow() == 1) {
+                    for (int i = 0; i < battleground.getMeleeRowPlayerTwo().size(); i++) {
                         rowBuff(card, battleground.getMeleeRowPlayerTwo().get(i));
-                        logger.info(playerTwo.getName() + " using Spell card"+ " - " + card.getName() + " " + card.getFraction().getName() + " +" + ((Spell) card).getBuf() +" all cards in melle row");
                     }
-                }else if (((Spell) card).getNumberRow() == 2)
-                {
-                    for (int i = 0; i < battleground.getRangeRowPlayerTwo().size(); i++)
-                    {
+                    logger.info(playerTwo.getName() + " using Spell card" + " - " + card.getName() + " " + card.getFraction().getName() + " +" + ((Spell) card).getBuf() + " all cards in melle row");
+                } else if (((Spell) card).getNumberRow() == 2) {
+                    for (int i = 0; i < battleground.getRangeRowPlayerTwo().size(); i++) {
                         rowBuff(card, battleground.getRangeRowPlayerTwo().get(i));
-                        logger.info(playerTwo.getName() + " using Spell card"+ " - " + card.getName() + " " + card.getFraction().getName() + " +" + ((Spell) card).getBuf() +" all cards in range row");
                     }
-                }else if (((Spell) card).getNumberRow() == 3)
-                {
-                    for (int i = 0; i < battleground.getSiegeRowPlayerTwo().size(); i++)
-                    {
+                    logger.info(playerTwo.getName() + " using Spell card" + " - " + card.getName() + " " + card.getFraction().getName() + " +" + ((Spell) card).getBuf() + " all cards in range row");
+                } else if (((Spell) card).getNumberRow() == 3) {
+                    for (int i = 0; i < battleground.getSiegeRowPlayerTwo().size(); i++) {
                         rowBuff(card, battleground.getSiegeRowPlayerTwo().get(i));
-                        logger.info(playerTwo.getName() + " using Spell card"+ " - " + card.getName() + " " + card.getFraction().getName() + " +" + ((Spell) card).getBuf() +" all cards in siege row");
                     }
+                    logger.info(playerTwo.getName() + " using Spell card" + " - " + card.getName() + " " + card.getFraction().getName() + " +" + ((Spell) card).getBuf() + " all cards in siege row");
                 }
             }
 

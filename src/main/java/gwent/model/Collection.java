@@ -18,6 +18,10 @@ public class Collection {
     protected ArrayList<Leader> leaders = new ArrayList<Leader>();
     protected ArrayList<Deck> decks = new ArrayList<Deck>();
 
+    public Collection() throws IOException {
+        initCollection();
+    }
+
     public List<Card> getCards() {
         return cards;
     }
