@@ -32,29 +32,28 @@ public class Deck extends Id {
         return name;
     }
 
+    public void setName(String name) {
+        this.name = name;
+    }
+
     public List<Card> getCards() {
         return cards;
+    }
+
+    public void setCards(Card card) {
+        this.cards.add(card);
     }
 
     public Leader getLeader() {
         return leader;
     }
 
-    public Fraction getFraction() {
-        return fraction;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
     public void setLeader(Leader leader) {
         this.leader = leader;
     }
 
-    public void setCards(Card card) {
-        this.cards.add(card);
-        System.out.println("set cards surifully");
+    public Fraction getFraction() {
+        return fraction;
     }
 
     public int[] howRarityCardsInDeck() {
@@ -71,19 +70,15 @@ public class Deck extends Id {
                 if (counterSilver <= 6) {
                     cards.add(card);
                     counterSilver++;
-                    //logger.info(" added in deck " + card.getName() + " is rarity a " + card.getRarity());
                 }
 
             } else if (card.getRarity().equals(Rarity.GOLD)) {
                 if (conterGold <= 4) {
                     cards.add(card);
                     conterGold++;
-
                 }
-
             } else {
                 cards.add(card);
-                //logger.info(" added in deck " + card.getName() + " is rarity a " + card.getRarity());
             }
 
         } else

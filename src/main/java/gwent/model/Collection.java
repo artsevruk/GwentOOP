@@ -120,7 +120,7 @@ public class Collection {
         }
 
         for (int i = 0; i < leaderName.size(); i++) {
-            leaders.add(new Leader(leaderName.get(i), leaderDescrip.get(i), howFraction(leaderFraction.get(i)), Integer.parseInt(leaderPower.get(i).substring(0, leaderPower.get(0).length() - 2)) ));
+            leaders.add(new Leader(leaderName.get(i), leaderDescrip.get(i), howFraction(leaderFraction.get(i)), Integer.parseInt(leaderPower.get(i).substring(0, leaderPower.get(0).length() - 2))));
         }
 
         logger.info("Leaders are added to the collection successfully! Amount leaders: " + getLeaders().size());
@@ -142,7 +142,6 @@ public class Collection {
             if (cards.get(i).getFraction().getName().equals(fraction.getName())) {
                 deck.addCardInDeck(cards.get(i));
                 counterMinCards++;
-
             }
         }
         logger.info("Deck " + name + " created! ");
@@ -150,22 +149,15 @@ public class Collection {
         return deck;
     }
 
-    public void printCollection()
-    {
-        for (int i =0; i < cards.size(); i++)
-        {
+    public void printCollection() {
+        for (int i = 0; i < cards.size(); i++) {
             logger.info("Card name: " + cards.get(i).getName() + ", Fraction: " + cards.get(i).getFraction().getName() + " Rarity: " + cards.get(i).getRarity());
-            System.out.println("Card name: " + cards.get(i).getName() + ", Fraction: " + cards.get(i).getFraction().getName() + " Rarity: " + cards.get(i).getRarity());
         }
-        for (int i =0; i < decks.size(); i++)
-        {
+        for (int i = 0; i < decks.size(); i++) {
             logger.info("Deck name: " + decks.get(i).getName() + ", Fraction: " + decks.get(i).getFraction().getName());
-            System.out.println("Deck name: " + decks.get(i).getName() + ", Fraction: " + decks.get(i).getFraction().getName());
         }
-        for (int i =0; i < leaders.size(); i++)
-        {
+        for (int i = 0; i < leaders.size(); i++) {
             logger.info("Leader name: " + leaders.get(i).getName() + ", Fraction: " + leaders.get(i).getFraction().getName() + " Rarity: " + leaders.get(i).getRarity());
-            System.out.println("Leader name: " + leaders.get(i).getName() + ", Fraction: " + leaders.get(i).getFraction().getName() + " Rarity: " + leaders.get(i).getRarity());
         }
     }
 
