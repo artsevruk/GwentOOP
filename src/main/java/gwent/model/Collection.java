@@ -98,22 +98,24 @@ public class Collection {
 
     public void initCollection() throws IOException {
         Reader reader = new Reader();
-        ArrayList<String> nameCards = reader.readOfCatlogInList("src/test/resources/DataCards/DataCards.xls", 0, 0);
-        ArrayList<String> descriptionCards = reader.readOfCatlogInList("src/test/resources/DataCards/DataCards.xls", 0, 1);
-        ArrayList<String> fractionCards = reader.readOfCatlogInList("src/test/resources/DataCards/DataCards.xls", 0, 2);
-        ArrayList<String> rarityCards = reader.readOfCatlogInList("src/test/resources/DataCards/DataCards.xls", 0, 3);
-        ArrayList<String> powerCards = reader.readOfCatlogInList("src/test/resources/DataCards/DataCards.xls", 0, 4);
-        ArrayList<String> rowebleCards = reader.readOfCatlogInList("src/test/resources/DataCards/DataCards.xls", 0, 5);
-        ArrayList<String> leaderName = reader.readOfCatlogInList("src/test/resources/DataCards/DataCards.xls", 1, 0);
-        ArrayList<String> leaderDescrip = reader.readOfCatlogInList("src/test/resources/DataCards/DataCards.xls", 1, 1);
-        ArrayList<String> leaderFraction = reader.readOfCatlogInList("src/test/resources/DataCards/DataCards.xls", 1, 2);
-        ArrayList<String> leaderPower = reader.readOfCatlogInList("src/test/resources/DataCards/DataCards.xls", 1, 3);
-        ArrayList<String> nameSpell = reader.readOfCatlogInList("src/test/resources/DataCards/DataCards.xls", 2, 0);
-        ArrayList<String> descriptionSpell = reader.readOfCatlogInList("src/test/resources/DataCards/DataCards.xls", 2, 1);
-        ArrayList<String> fractionSpell = reader.readOfCatlogInList("src/test/resources/DataCards/DataCards.xls", 2, 2);
-        ArrayList<String> raritySpell = reader.readOfCatlogInList("src/test/resources/DataCards/DataCards.xls", 2, 3);
-        ArrayList<String> numberBuff = reader.readOfCatlogInList("src/test/resources/DataCards/DataCards.xls", 2, 4);
-        ArrayList<String> buff = reader.readOfCatlogInList("src/test/resources/DataCards/DataCards.xls", 2, 5);
+        String pathCardsData = "src/test/resources/DataCards/DataCards.xls";
+
+        ArrayList<String> nameCards = reader.readOfCatlogInList(pathCardsData, 0, 0);
+        ArrayList<String> descriptionCards = reader.readOfCatlogInList(pathCardsData, 0, 1);
+        ArrayList<String> fractionCards = reader.readOfCatlogInList(pathCardsData, 0, 2);
+        ArrayList<String> rarityCards = reader.readOfCatlogInList(pathCardsData, 0, 3);
+        ArrayList<String> powerCards = reader.readOfCatlogInList(pathCardsData, 0, 4);
+        ArrayList<String> rowebleCards = reader.readOfCatlogInList(pathCardsData, 0, 5);
+        ArrayList<String> leaderName = reader.readOfCatlogInList(pathCardsData, 1, 0);
+        ArrayList<String> leaderDescrip = reader.readOfCatlogInList(pathCardsData, 1, 1);
+        ArrayList<String> leaderFraction = reader.readOfCatlogInList(pathCardsData, 1, 2);
+        ArrayList<String> leaderPower = reader.readOfCatlogInList(pathCardsData, 1, 3);
+        ArrayList<String> nameSpell = reader.readOfCatlogInList(pathCardsData, 2, 0);
+        ArrayList<String> descriptionSpell = reader.readOfCatlogInList(pathCardsData, 2, 1);
+        ArrayList<String> fractionSpell = reader.readOfCatlogInList(pathCardsData, 2, 2);
+        ArrayList<String> raritySpell = reader.readOfCatlogInList(pathCardsData, 2, 3);
+        ArrayList<String> numberBuff = reader.readOfCatlogInList(pathCardsData, 2, 4);
+        ArrayList<String> buff = reader.readOfCatlogInList(pathCardsData, 2, 5);
 
         for (int i = 0; i < nameCards.size(); i++) {
             cards.add(new Creature(nameCards.get(i), descriptionCards.get(i), howFraction(fractionCards.get(i)), howRarity(rarityCards.get(i)), Integer.parseInt(powerCards.get(i).substring(0, powerCards.get(0).length() - 2)), howRoweble(rowebleCards.get(i))));

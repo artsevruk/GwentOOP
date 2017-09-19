@@ -100,11 +100,6 @@ public class Game {
             ((Creature) cardOnDesk).setCardPower(((Creature) cardOnDesk).getCardPower() + ((Spell) card).getBuf());
     }
 
-    private void turnSpell(Card card, ArrayList<Card> mellePosition, ArrayList<Card> rangePosition, ArrayList<Card> siegePosition) {
-
-    }
-
-
     private void buffRow(Player player, Card card, ArrayList<Card> rowPlayer)
     {
         for (int i = 0; i < rowPlayer.size(); i++) {
@@ -167,17 +162,13 @@ public class Game {
         else logger.info("First turn " + playerTwo.getName());
         while (!round.getTurnPass()) {
             if (round.getTurn()) {
-                //turnPlayerOne();
                 turnPlayer(playerOne, battleground.getMeleeRowPlayerOne(), battleground.getRangeRowPlayerOne(), battleground.getSiegeRowPlayerOne());
                 isPassed(countTurn++, numberTurn, playerOne);
-                //turnPlayerTwo();
                 turnPlayer(playerTwo, battleground.getSiegeRowPlayerTwo(), battleground.getSiegeRowPlayerTwo(), battleground.getSiegeRowPlayerTwo());
                 isPassed(countTurn++, numberTurn, playerTwo);
             } else if (!round.getTurn()) {
-                //turnPlayerTwo();
                 turnPlayer(playerTwo, battleground.getSiegeRowPlayerTwo(), battleground.getSiegeRowPlayerTwo(), battleground.getSiegeRowPlayerTwo());
                 isPassed(countTurn++, numberTurn, playerTwo);
-                //turnPlayerOne();
                 turnPlayer(playerOne, battleground.getMeleeRowPlayerOne(), battleground.getRangeRowPlayerOne(), battleground.getSiegeRowPlayerOne());
                 isPassed(countTurn++, numberTurn, playerOne);
             }
