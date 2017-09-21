@@ -9,7 +9,7 @@ import org.testng.annotations.DataProvider;
 /**
  * Created by artsevruk on 11.09.2017.
  */
-public class MonstersCardsDataProvider {
+public class CardsDataProvider {
 
 
     @DataProvider(name = "CustomMonsters")

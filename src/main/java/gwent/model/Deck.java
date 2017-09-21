@@ -81,8 +81,12 @@ public class Deck extends Id {
                 cards.add(card);
             }
 
-        } else
+        } else{
             logger.info("cards in deck " + name + " : " + cards.size() + ". Bronze: " + (cards.size() - counterSilver - conterGold) + "Silver: " + counterSilver + conterGold);
+        }
+
+        logger.info("Added in deck card " + card.getFraction().getName()+ " - " + card.getName());
+        logger.info("Deck size: " + cards.size());
     }
 
     public void addListCardsInDeck(ArrayList<Card> cardsList) {
