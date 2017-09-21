@@ -21,17 +21,22 @@ public class GameUseCaseTest {
     final static Logger logger = Logger.getLogger(GameUseCaseTest.class);
     Battleground battleground = Battleground.getInstance();
 
-    Deck deckMonsters = new Deck("Custom deck", new Monsters(), new Leader("Leshiy" , "Leader for custom deck", new Monsters(), 8));
+    Deck deckMonsters = new Deck("Custom deck", new Monsters(), new Leader("LESHIY" , "Leader for custom deck Monsters", new Monsters(), 8));
+    Deck deckSkellige = new Deck("Custom deck", new Skellige(), new Leader("CRACH AN CRAITE" , "Leader for custom deck Skellige", new Monsters(), 8));
 
 
 
     @Test(dataProvider = "CustomMonsters", dataProviderClass = MonstersCardsDataProvider.class)
-    public void createCustomDeckUseCaseTest(Card cards)
+    public void createCustomDeckUseCaseTest(Card cardsMonsters, Card cardsSkellige)
     {
-
-        deckMonsters.addCardInDeck(cards);
-        logger.info("Added in deck card " + cards.getFraction().getName()+ " - " + cards.getName());
+        deckMonsters.addCardInDeck(cardsMonsters);
+        logger.info("Added in deck card " + cardsMonsters.getFraction().getName()+ " - " + cardsMonsters.getName());
         logger.info("Deck size: " + deckMonsters.getCards().size());
+
+        deckSkellige.addCardInDeck(cardsSkellige);
+        logger.info("Added in deck card " + cardsSkellige.getFraction().getName()+ " - " + cardsSkellige.getName());
+        logger.info("Deck size: " + deckMonsters.getCards().size());
+
     }
 
 
