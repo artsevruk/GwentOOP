@@ -173,9 +173,32 @@ public class Game {
                 isPassed(countTurn++, numberTurn, playerOne);
             }
         }
-        pointsPlayers[0] = battleground.getCardPowerOnBattlergroundInEndRoundForPlayer(battleground.getMeleeRowPlayerOne(), battleground.getRangeRowPlayerOne(), battleground.getSiegeRowPlayerOne());
-        pointsPlayers[1] = battleground.getCardPowerOnBattlergroundInEndRoundForPlayer(battleground.getMeleeRowPlayerTwo(), battleground.getRangeRowPlayerTwo(), battleground.getSiegeRowPlayerTwo());
-        printMessageLogg(pointsPlayers, playerOne.getName() + " is WINNER Round " + round.getRound() + ", with a score of " + pointsPlayers[0] + " : " + pointsPlayers[1] + "!", playerTwo.getName() + " is WINNER Round" + round.getRound() + ", with a score of " + pointsPlayers[0] + " : " + pointsPlayers[1] + "!", "The round ended in a draw, with a score of " + pointsPlayers[0] + " : " + pointsPlayers[1] + "!");
+
+
+        int pointsPlayerOne = battleground.getCardPowerOnBattlergroundInEndRoundForPlayer(battleground.getMeleeRowPlayerOne(), battleground.getRangeRowPlayerOne(), battleground.getSiegeRowPlayerOne());
+        int pointsPlayerTwo = battleground.getCardPowerOnBattlergroundInEndRoundForPlayer(battleground.getMeleeRowPlayerTwo(), battleground.getRangeRowPlayerTwo(), battleground.getSiegeRowPlayerTwo());
+
+        addPointsPlayers(pointsPlayerOne,pointsPlayerTwo);
+
+        printMessageLogg(pointsPlayers, playerOne.getName() + " is WINNER Round " + round.getRound() + ", with a score of " + pointsPlayerOne + " : " + pointsPlayerTwo + "!", playerTwo.getName() + " is WINNER Round " + round.getRound() + ", with a score of " + pointsPlayerOne + " : " + pointsPlayerTwo + "!", "The round ended in a draw, with a score of " + pointsPlayerOne + " : " + pointsPlayerTwo + "!");
+
+    }
+
+    private void addPointsPlayers(int pointPlayerOne, int pointPlayerTwo)
+    {
+
+        if (pointPlayerOne > pointPlayerTwo)
+        {
+            pointsPlayers[0]++;
+        }
+        else if (pointPlayerOne < pointPlayerTwo){
+            pointsPlayers[1]++;
+        }
+        else {
+            pointsPlayers[0]++;
+            pointsPlayers[1]++;
+        }
+
 
     }
 
