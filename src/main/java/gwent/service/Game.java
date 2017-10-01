@@ -20,7 +20,7 @@ public class Game {
     private Player playerOne;
     private Player playerTwo;
     private Round round;
-    private int[] pointsPlayers = new int[2];
+    private int[] roundPointsPlayers = new int[2];
 
     public Game(Battleground battleground, Player playerOne, Player playerTwo, Round round) {
         this.battleground = battleground;
@@ -180,7 +180,7 @@ public class Game {
 
         addPointsPlayers(pointsPlayerOne,pointsPlayerTwo);
 
-        printMessageLogg(pointsPlayers, playerOne.getName() + " is WINNER Round " + round.getRound() + ", with a score of " + pointsPlayerOne + " : " + pointsPlayerTwo + "!", playerTwo.getName() + " is WINNER Round " + round.getRound() + ", with a score of " + pointsPlayerOne + " : " + pointsPlayerTwo + "!", "The round ended in a draw, with a score of " + pointsPlayerOne + " : " + pointsPlayerTwo + "!");
+        printMessageLogg(pointsPlayerOne, pointsPlayerTwo,playerOne.getName() + " is WINNER Round " + round.getRound() + ", with a score of " + pointsPlayerOne + " : " + pointsPlayerTwo + "!", playerTwo.getName() + " is WINNER Round " + round.getRound() + ", with a score of " + pointsPlayerOne + " : " + pointsPlayerTwo + "!", "The round ended in a draw, with a score of " + pointsPlayerOne + " : " + pointsPlayerTwo + "!");
 
     }
 
@@ -189,14 +189,14 @@ public class Game {
 
         if (pointPlayerOne > pointPlayerTwo)
         {
-            pointsPlayers[0]++;
+            roundPointsPlayers[0]++;
         }
         else if (pointPlayerOne < pointPlayerTwo){
-            pointsPlayers[1]++;
+            roundPointsPlayers[1]++;
         }
         else {
-            pointsPlayers[0]++;
-            pointsPlayers[1]++;
+            roundPointsPlayers[0]++;
+            roundPointsPlayers[1]++;
         }
 
 
@@ -209,17 +209,17 @@ public class Game {
         roundOfGame();
         round.setRound(2);
         roundOfGame();
-        if (pointsPlayers[0] == pointsPlayers[1]) {
+        if (roundPointsPlayers[0] == roundPointsPlayers[1]) {
             round.setRound(3);
             roundOfGame();
         }
-        printMessageLogg(pointsPlayers, playerOne.getName() + " is WINNER GAME, with a score of " + pointsPlayers[0] + " : " + pointsPlayers[1] + "!", playerTwo.getName() + " is WINNER GAME, with a score of " + pointsPlayers[0] + " : " + pointsPlayers[1] + "!", "The game ended in a draw, with a score of " + pointsPlayers[0] + " : " + pointsPlayers[1] + "!");
+        printMessageLogg(roundPointsPlayers[0], roundPointsPlayers[1], playerOne.getName() + " is WINNER GAME, with a score of " + roundPointsPlayers[0] + " : " + roundPointsPlayers[1] + "!", playerTwo.getName() + " is WINNER GAME, with a score of " + roundPointsPlayers[0] + " : " + roundPointsPlayers[1] + "!", "The game ended in a draw, with a score of " + roundPointsPlayers[0] + " : " + roundPointsPlayers[1] + "!");
         logger.info("--------------------------------------------------------------------------------------------------------------");
     }
 
-    private void printMessageLogg(int[] pointsPlayers, String messageOne, String messageTwo, String messageTрree) {
-        if (pointsPlayers[0] > pointsPlayers[1]) logger.info(messageOne);
-        else if (pointsPlayers[0] < pointsPlayers[1]) logger.info(messageTwo);
+    private void printMessageLogg(int pointsPlayerOne, int pointsPlayerTwo, String messageOne, String messageTwo, String messageTрree) {
+        if (pointsPlayerOne > pointsPlayerTwo) logger.info(messageOne);
+        else if (pointsPlayerOne < pointsPlayerTwo) logger.info(messageTwo);
         else logger.info(messageTрree);
     }
 

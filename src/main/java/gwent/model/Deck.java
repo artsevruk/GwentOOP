@@ -1,5 +1,6 @@
 package gwent.model;
 
+import gwent.Id;
 import gwent.model.Fraction.Fraction;
 import org.apache.log4j.Logger;
 
