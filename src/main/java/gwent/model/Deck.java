@@ -57,11 +57,6 @@ public class Deck extends Id {
         return fraction;
     }
 
-    public int[] howRarityCardsInDeck() {
-        int[] countrsRarityCards = new int[3];
-        return countrsRarityCards;
-    }
-
     public void addCardInDeck(Card card) {
         int counterSilver = 0;
         int conterGold = 0;

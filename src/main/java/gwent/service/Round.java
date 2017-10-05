@@ -5,12 +5,11 @@ package gwent.service;
  */
 public class Round {
 
-    private int round;
+    private int round = 1;
     private boolean turn;
     private boolean turnPass = false;
 
     public Round() {
-        this.round = 1;
         this.turn = draw();
     }
 
@@ -38,7 +37,7 @@ public class Round {
         this.turnPass = turnPass;
     }
 
-    public boolean draw(){
+    private boolean draw(){
         return Math.random() < 0.5;
     }
 

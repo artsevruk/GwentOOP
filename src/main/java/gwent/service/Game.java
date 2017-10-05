@@ -217,10 +217,10 @@ public class Game {
         logger.info("--------------------------------------------------------------------------------------------------------------");
     }
 
-    private void printMessageLogg(int pointsPlayerOne, int pointsPlayerTwo, String messageOne, String messageTwo, String messageTрree) {
+    private void printMessageLogg(int pointsPlayerOne, int pointsPlayerTwo, String messageOne, String messageTwo, String messageThree) {
         if (pointsPlayerOne > pointsPlayerTwo) logger.info(messageOne);
         else if (pointsPlayerOne < pointsPlayerTwo) logger.info(messageTwo);
-        else logger.info(messageTрree);
+        else logger.info(messageThree);
     }
 
 
