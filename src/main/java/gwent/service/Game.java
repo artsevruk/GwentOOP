@@ -124,7 +124,7 @@ public class Game {
     }
 
 
-    public void turnPlayer(Player player, ArrayList<Card> meleeRowPlayer, ArrayList<Card> rangeRowPlayer, ArrayList<Card> siegeRowPlayer)
+    private void turnPlayer(Player player, ArrayList<Card> meleeRowPlayer, ArrayList<Card> rangeRowPlayer, ArrayList<Card> siegeRowPlayer)
     {
 
         if (player.getCardsOnHand().size() > 0) {
