@@ -34,4 +34,13 @@ public class Spell extends Card {
     public void setBuf(int buf) {
         this.buf = buf;
     }
+
+    @Override
+    public String toString() {
+        return super.toString() +
+                "Spell{" +
+                "numberRow=" + numberRow +
+                ", buf=" + buf +
+                '}';
+    }
 }

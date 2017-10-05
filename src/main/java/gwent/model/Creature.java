@@ -7,8 +7,8 @@ import gwent.model.Fraction.Fraction;
  */
 public class Creature extends Card {
 
-    protected int cardPower;
-    protected Roweble position;
+    private int cardPower;
+    private Roweble position;
 
     public Creature(String name, String description, Fraction fraction, Rarity rarity, int cardPower, Roweble position) {
         super(name, description, fraction, rarity);
@@ -32,4 +32,14 @@ public class Creature extends Card {
     public void setPosition(Roweble position) {
         this.position = position;
     }
+
+    @Override
+    public String toString() {
+        return super.toString() +
+                "Creature{" +
+                "cardPower=" + cardPower +
+                ", position=" + position +
+                '}';
+    }
+
 }
