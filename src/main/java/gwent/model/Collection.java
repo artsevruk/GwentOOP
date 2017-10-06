@@ -13,6 +13,7 @@ import java.util.List;
  */
 public class Collection {
     final static Logger logger = Logger.getLogger(Collection.class);
+    private static final String PATH = "src/test/resources/DataCards/DataCards.xls";
 
     protected ArrayList<Card> cards = new ArrayList<Card>();
     protected ArrayList<Leader> leaders = new ArrayList<Leader>();
@@ -98,24 +99,23 @@ public class Collection {
 
     public void initCollection() throws IOException {
         Reader reader = new Reader();
-        String pathCardsData = "src/test/resources/DataCards/DataCards.xls";
 
-        ArrayList<String> nameCards = reader.readOfCatlogInList(pathCardsData, 0, 0);
-        ArrayList<String> descriptionCards = reader.readOfCatlogInList(pathCardsData, 0, 1);
-        ArrayList<String> fractionCards = reader.readOfCatlogInList(pathCardsData, 0, 2);
-        ArrayList<String> rarityCards = reader.readOfCatlogInList(pathCardsData, 0, 3);
-        ArrayList<String> powerCards = reader.readOfCatlogInList(pathCardsData, 0, 4);
-        ArrayList<String> rowebleCards = reader.readOfCatlogInList(pathCardsData, 0, 5);
-        ArrayList<String> leaderName = reader.readOfCatlogInList(pathCardsData, 1, 0);
-        ArrayList<String> leaderDescrip = reader.readOfCatlogInList(pathCardsData, 1, 1);
-        ArrayList<String> leaderFraction = reader.readOfCatlogInList(pathCardsData, 1, 2);
-        ArrayList<String> leaderPower = reader.readOfCatlogInList(pathCardsData, 1, 3);
-        ArrayList<String> nameSpell = reader.readOfCatlogInList(pathCardsData, 2, 0);
-        ArrayList<String> descriptionSpell = reader.readOfCatlogInList(pathCardsData, 2, 1);
-        ArrayList<String> fractionSpell = reader.readOfCatlogInList(pathCardsData, 2, 2);
-        ArrayList<String> raritySpell = reader.readOfCatlogInList(pathCardsData, 2, 3);
-        ArrayList<String> numberBuff = reader.readOfCatlogInList(pathCardsData, 2, 4);
-        ArrayList<String> buff = reader.readOfCatlogInList(pathCardsData, 2, 5);
+        ArrayList<String> nameCards = reader.readOfCatlogInList(PATH, 0, 0);
+        ArrayList<String> descriptionCards = reader.readOfCatlogInList(PATH, 0, 1);
+        ArrayList<String> fractionCards = reader.readOfCatlogInList(PATH, 0, 2);
+        ArrayList<String> rarityCards = reader.readOfCatlogInList(PATH, 0, 3);
+        ArrayList<String> powerCards = reader.readOfCatlogInList(PATH, 0, 4);
+        ArrayList<String> rowebleCards = reader.readOfCatlogInList(PATH, 0, 5);
+        ArrayList<String> leaderName = reader.readOfCatlogInList(PATH, 1, 0);
+        ArrayList<String> leaderDescrip = reader.readOfCatlogInList(PATH, 1, 1);
+        ArrayList<String> leaderFraction = reader.readOfCatlogInList(PATH, 1, 2);
+        ArrayList<String> leaderPower = reader.readOfCatlogInList(PATH, 1, 3);
+        ArrayList<String> nameSpell = reader.readOfCatlogInList(PATH, 2, 0);
+        ArrayList<String> descriptionSpell = reader.readOfCatlogInList(PATH, 2, 1);
+        ArrayList<String> fractionSpell = reader.readOfCatlogInList(PATH, 2, 2);
+        ArrayList<String> raritySpell = reader.readOfCatlogInList(PATH, 2, 3);
+        ArrayList<String> numberBuff = reader.readOfCatlogInList(PATH, 2, 4);
+        ArrayList<String> buff = reader.readOfCatlogInList(PATH, 2, 5);
 
         for (int i = 0; i < nameCards.size(); i++) {
             cards.add(new Creature(nameCards.get(i), descriptionCards.get(i), howFraction(fractionCards.get(i)), howRarity(rarityCards.get(i)), Integer.parseInt(powerCards.get(i).substring(0, powerCards.get(0).length() - 2)), howRoweble(rowebleCards.get(i))));
@@ -126,13 +126,11 @@ public class Collection {
         }
 
         logger.info("Leaders are added to the collection successfully! Amount leaders: " + getLeaders().size());
-        System.out.println("Leaders are added to the collection successfully! Amount leaders: " + getLeaders().size());
 
         for (int i = 0; i < nameSpell.size(); i++) {
             cards.add(new Spell(nameSpell.get(i), descriptionSpell.get(i), howFraction(fractionSpell.get(i)), howRarity(raritySpell.get(i)), Integer.parseInt(numberBuff.get(i).substring(0, numberBuff.get(0).length() - 2)), Integer.parseInt(buff.get(i).substring(0, buff.get(0).length() - 2))));
         }
         logger.info("Cards are added to the collection successfully! Amount cards: " + getCards().size());
-        System.out.println("Cards are added to the collection successfully! Amount cards: " + getCards().size());
 
     }
 
@@ -147,7 +145,6 @@ public class Collection {
             }
         }
         logger.info("Deck " + name + " created! ");
-        System.out.println("Deck " + name + " created! ");
         return deck;
     }
 
